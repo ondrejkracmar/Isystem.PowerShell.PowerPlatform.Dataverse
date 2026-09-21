@@ -1,0 +1,1460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml" xmlns="http://msh" xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/managed/2004/10">
+  <!-- ==================== Connect-PSDataverse ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Connect-PSDataverse</command:name>
+      <command:verb>Connect</command:verb>
+      <command:noun>PSDataverse</command:noun>
+      <maml:description>
+        <maml:para>Connects to a Microsoft Dataverse environment.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Connect-PSDataverse cmdlet establishes a connection to a Microsoft Dataverse environment using one of several authentication methods: connection string, client secret, certificate, managed identity, Isystem.AzAuth (-AuthMode, the same modes PSDataRepository uses, including WorkloadIdentity, NonInteractive, Interactive and DeviceCode with a named on-disk cache), or a delegated user sign-in with a portable in-memory token cache (-Delegated, for environments without application users). The connection is stored in the current PowerShell runspace and used by all subsequent Dataverse cmdlets.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Connect-PSDataverse</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>ConnectionString</maml:name><command:parameterValue required="true">SecureString</command:parameterValue><dev:type><maml:name>SecureString</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>MaxRetryCount</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>RetryPauseSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Connect-PSDataverse</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Url</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="false" globbing="false"><maml:name>ClientId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="2" pipelineInput="false" globbing="false"><maml:name>ClientSecret</maml:name><command:parameterValue required="true">SecureString</command:parameterValue><dev:type><maml:name>SecureString</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TenantId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>MaxRetryCount</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>RetryPauseSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Connect-PSDataverse</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Url</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="false" globbing="false"><maml:name>ClientId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="2" pipelineInput="false" globbing="false"><maml:name>CertificateThumbprint</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TenantId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>MaxRetryCount</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>RetryPauseSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Connect-PSDataverse</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Url</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>ManagedIdentity</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ManagedIdentityId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>MaxRetryCount</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>RetryPauseSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Connect-PSDataverse</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Url</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>AuthMode</maml:name><command:parameterValueGroup><command:parameterValue required="false" variableLength="false">ClientSecret</command:parameterValue><command:parameterValue required="false" variableLength="false">ClientCertificate</command:parameterValue><command:parameterValue required="false" variableLength="false">ManagedIdentity</command:parameterValue><command:parameterValue required="false" variableLength="false">WorkloadIdentity</command:parameterValue><command:parameterValue required="false" variableLength="false">NonInteractive</command:parameterValue><command:parameterValue required="false" variableLength="false">Interactive</command:parameterValue><command:parameterValue required="false" variableLength="false">DeviceCode</command:parameterValue><command:parameterValue required="false" variableLength="false">Cache</command:parameterValue></command:parameterValueGroup><dev:type><maml:name>DataverseAuthMode</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ClientId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ClientSecret</maml:name><command:parameterValue required="true">SecureString</command:parameterValue><dev:type><maml:name>SecureString</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>CertificateThumbprint</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>CertificatePath</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Certificate</maml:name><command:parameterValue required="true">X509Certificate2</command:parameterValue><dev:type><maml:name>X509Certificate2</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TenantId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TokenCacheName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Username</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ExternalToken</maml:name><command:parameterValue required="true">SecureString</command:parameterValue><dev:type><maml:name>SecureString</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TimeoutSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>MaxRetryCount</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>RetryPauseSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Connect-PSDataverse</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Url</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>Delegated</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ClientId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TenantId</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TokenCache</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>LoginMode</maml:name><command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Auto</command:parameterValue><command:parameterValue required="false" variableLength="false">Silent</command:parameterValue><command:parameterValue required="false" variableLength="false">Interactive</command:parameterValue><command:parameterValue required="false" variableLength="false">DeviceCode</command:parameterValue></command:parameterValueGroup><dev:type><maml:name>DataverseLoginMode</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>RedirectUri</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>MaxRetryCount</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>RetryPauseSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>ConnectionString</maml:name>
+        <maml:description>
+          <maml:para>A Dataverse connection string provided as a SecureString. Used in the ConnectionString parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SecureString</command:parameterValue>
+        <dev:type>
+          <maml:name>SecureString</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>Url</maml:name>
+        <maml:description>
+          <maml:para>The URL of the Dataverse environment (e.g., https://org.crm.dynamics.com).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="1" pipelineInput="false" globbing="false">
+        <maml:name>ClientId</maml:name>
+        <maml:description>
+          <maml:para>The Microsoft Entra application (client) ID. Mandatory for ClientSecret and Certificate; optional for AzAuth (mode dependent) and Delegated, where it defaults to the well-known public Dataverse client 51f81489-12ee-4a9e-aaae-a2591f45987d.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="2" pipelineInput="false" globbing="false">
+        <maml:name>ClientSecret</maml:name>
+        <maml:description>
+          <maml:para>The client secret for app-based authentication (ClientSecret set, or AzAuth -AuthMode ClientSecret), provided as a SecureString.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SecureString</command:parameterValue>
+        <dev:type>
+          <maml:name>SecureString</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="2" pipelineInput="false" globbing="false">
+        <maml:name>CertificateThumbprint</maml:name>
+        <maml:description>
+          <maml:para>The thumbprint of the certificate used for certificate-based authentication (Certificate set, or AzAuth -AuthMode ClientCertificate).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>TenantId</maml:name>
+        <maml:description>
+          <maml:para>The Microsoft Entra tenant ID. Optional; when omitted, delegated flows use the organizations authority.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="false" globbing="false">
+        <maml:name>ManagedIdentity</maml:name>
+        <maml:description>
+          <maml:para>Indicates that managed identity authentication should be used. Typically used when running in Azure.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>ManagedIdentityId</maml:name>
+        <maml:description>
+          <maml:para>The client ID of a user-assigned managed identity. If omitted, the system-assigned identity is used.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>MaxRetryCount</maml:name>
+        <maml:description>
+          <maml:para>Maximum number of retry attempts for transient failures. Valid range: 0-10. Default: 3.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+        <dev:defaultValue>3</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>RetryPauseSeconds</maml:name>
+        <maml:description>
+          <maml:para>Pause in seconds between retry attempts. Valid range: 1-60. Default: 5.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+        <dev:defaultValue>5</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="false" globbing="false">
+        <maml:name>AuthMode</maml:name>
+        <maml:description>
+          <maml:para>Isystem.AzAuth authentication mode. Names match PSDataRepository -AuthMode: ClientSecret, ClientCertificate, ManagedIdentity, WorkloadIdentity, NonInteractive (Azure.Identity default chain), Interactive (browser), DeviceCode, Cache (silent from a named on-disk cache).</maml:para>
+        </maml:description>
+        <command:parameterValueGroup>
+          <command:parameterValue required="false" variableLength="false">ClientSecret</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">ClientCertificate</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">ManagedIdentity</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">WorkloadIdentity</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">NonInteractive</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Interactive</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">DeviceCode</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Cache</command:parameterValue>
+        </command:parameterValueGroup>
+        <dev:type>
+          <maml:name>DataverseAuthMode</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Certificate</maml:name>
+        <maml:description>
+          <maml:para>An X509Certificate2 instance for AzAuth ClientCertificate mode. Alternative to -CertificateThumbprint and -CertificatePath.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">X509Certificate2</command:parameterValue>
+        <dev:type>
+          <maml:name>X509Certificate2</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>CertificatePath</maml:name>
+        <maml:description>
+          <maml:para>Path to a certificate file (PFX/PEM) for AzAuth ClientCertificate mode. Alternative to -CertificateThumbprint and -Certificate.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Delegated</maml:name>
+        <maml:description>
+          <maml:para>Delegated (user) sign-in with an in-memory MSAL token cache that the caller persists wherever it wants (Key Vault, file). Use when the environment has no application users, such as Dataverse for Teams without a premium licence. Export the cache with Get-PSDataverseTokenCache and pass it back through -TokenCache on the next run.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>ExternalToken</maml:name>
+        <maml:description>
+          <maml:para>Federated token for AzAuth WorkloadIdentity mode (for example the AKS or GitHub Actions identity token), as a SecureString.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">SecureString</command:parameterValue>
+        <dev:type>
+          <maml:name>SecureString</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>LoginMode</maml:name>
+        <maml:description>
+          <maml:para>What to do when the token cache holds no usable refresh token: Auto (silent, then browser), Silent (fail - for unattended runs), Interactive (silent, then browser), DeviceCode (silent, then device-code prompt for headless hosts). Default: Auto.</maml:para>
+        </maml:description>
+        <command:parameterValueGroup>
+          <command:parameterValue required="false" variableLength="false">Auto</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Silent</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Interactive</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">DeviceCode</command:parameterValue>
+        </command:parameterValueGroup>
+        <dev:type>
+          <maml:name>DataverseLoginMode</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>RedirectUri</maml:name>
+        <maml:description>
+          <maml:para>Redirect URI of the public client application used by -Delegated. Default: http://localhost.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>TimeoutSeconds</maml:name>
+        <maml:description>
+          <maml:para>Timeout for interactive and managed-identity token acquisition in AzAuth modes. Valid range: 10-600. Default: 120.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>TokenCache</maml:name>
+        <maml:description>
+          <maml:para>Serialized token cache produced by Get-PSDataverseTokenCache in an earlier session. Seeds the in-memory MSAL cache so the sign-in is silent.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>TokenCacheName</maml:name>
+        <maml:description>
+          <maml:para>Name of the on-disk MSAL token cache used by AzAuth Interactive, DeviceCode and Cache modes. The cache is protected by DPAPI/keychain and bound to the current user and machine.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Username</maml:name>
+        <maml:description>
+          <maml:para>Account (UPN or object id) to select from the named cache in AzAuth Cache mode.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet does not produce output.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Connect using a connection string ---</maml:title>
+        <dev:code>$cs = ConvertTo-SecureString "AuthType=ClientSecret;Url=https://org.crm.dynamics.com;ClientId=...;ClientSecret=..." -AsPlainText -Force
+Connect-PSDataverse $cs</dev:code>
+        <dev:remarks>
+          <maml:para>Connects to Dataverse using a connection string stored as a SecureString.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Connect using client secret ---</maml:title>
+        <dev:code>$secret = ConvertTo-SecureString "my-secret" -AsPlainText -Force
+Connect-PSDataverse -Url "https://org.crm.dynamics.com" -ClientId "app-id" -ClientSecret $secret -TenantId "tenant-id"</dev:code>
+        <dev:remarks>
+          <maml:para>Connects using explicit client ID and secret parameters.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Connect using managed identity ---</maml:title>
+        <dev:code>Connect-PSDataverse -Url "https://org.crm.dynamics.com" -ManagedIdentity</dev:code>
+        <dev:remarks>
+          <maml:para>Connects using the system-assigned managed identity of the Azure host.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 4: Connect with custom retry policy ---</maml:title>
+        <dev:code>Connect-PSDataverse -Url "https://org.crm.dynamics.com" -ManagedIdentity -MaxRetryCount 5 -RetryPauseSeconds 10</dev:code>
+        <dev:remarks>
+          <maml:para>Connects and configures a retry policy with up to 5 retries and a 10-second pause between attempts.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Disconnect-PSDataverse ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Disconnect-PSDataverse</command:name>
+      <command:verb>Disconnect</command:verb>
+      <command:noun>PSDataverse</command:noun>
+      <maml:description>
+        <maml:para>Disconnects from the current Dataverse environment.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Disconnect-PSDataverse cmdlet disposes the current Dataverse connection and removes the connection manager from the runspace session state.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Disconnect-PSDataverse</maml:name></command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet does not produce output.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Disconnect from Dataverse ---</maml:title>
+        <dev:code>Disconnect-PSDataverse</dev:code>
+        <dev:remarks>
+          <maml:para>Disconnects from the current Dataverse environment and releases resources.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Get-PSDataverseConnection ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Get-PSDataverseConnection</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PSDataverseConnection</command:noun>
+      <maml:description>
+        <maml:para>Gets the current Dataverse connection information.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-PSDataverseConnection cmdlet returns an object with properties indicating whether a Dataverse connection is active in the current runspace, along with the organization URL and user ID if connected.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Get-PSDataverseConnection</maml:name></command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>PSObject</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>An object with IsConnected (bool), OrganizationUrl (string), and UserId (Guid) properties.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Check connection status ---</maml:title>
+        <dev:code>Get-PSDataverseConnection</dev:code>
+        <dev:remarks>
+          <maml:para>Returns the current connection state including IsConnected, OrganizationUrl, and UserId.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Use in a condition ---</maml:title>
+        <dev:code>if ((Get-PSDataverseConnection).IsConnected) {
+    Write-Host "Connected!"
+}</dev:code>
+        <dev:remarks>
+          <maml:para>Checks whether a connection is currently active.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Get-PSDataverseRecord ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Get-PSDataverseRecord</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PSDataverseRecord</command:noun>
+      <maml:description>
+        <maml:para>Gets a Dataverse record by ID or alternate key.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-PSDataverseRecord cmdlet retrieves a single record from a Dataverse table by its logical name and unique identifier. You can optionally specify which columns to retrieve.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>Id</maml:name><command:parameterValue required="true">Guid</command:parameterValue><dev:type><maml:name>Guid</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>Key</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="named" pipelineInput="True (ByValue)" globbing="false"><maml:name>InputObject</maml:name><command:parameterValue required="true">Entity</command:parameterValue><dev:type><maml:name>Entity</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="true (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the Dataverse table (e.g., "account", "contact"). Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="true (ByValue, ByPropertyName)" globbing="false">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The unique identifier (GUID) of the record to retrieve. Accepts pipeline input by value (e.g., raw Guid from New-PSDataverseRecord) or by property name. Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="true (ByValue)" globbing="false">
+        <maml:name>InputObject</maml:name>
+        <maml:description>
+          <maml:para>An Entity object to re-retrieve. The LogicalName and Id are extracted from the entity. Used in the ByInputObject parameter set. Accepts pipeline input from Find-PSDataverseRecord or Invoke-PSDataverseFetchXml.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Entity</command:parameterValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Columns</maml:name>
+        <maml:description>
+          <maml:para>An array of column logical names to retrieve. If omitted, all columns are returned.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Key</maml:name>
+        <maml:description>
+          <maml:para>Alternate key (attribute name = value hashtable) identifying the record instead of -Id, e.g. @{ accountnumber = 'A-1' }.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>The Dataverse record as an Entity object.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Get a record with all columns ---</maml:title>
+        <dev:code>Get-PSDataverseRecord -LogicalName "account" -Id "00000000-0000-0000-0000-000000000001"</dev:code>
+        <dev:remarks>
+          <maml:para>Retrieves an account record by its ID with all columns.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Get specific columns ---</maml:title>
+        <dev:code>Get-PSDataverseRecord "account" "00000000-0000-0000-0000-000000000001" -Columns "name", "emailaddress1"</dev:code>
+        <dev:remarks>
+          <maml:para>Retrieves only the name and emailaddress1 columns of the account record.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Pipeline via InputObject ---</maml:title>
+        <dev:code>Find-PSDataverseRecord "account" -Filter @{ statecode = 0 } | Get-PSDataverseRecord -Columns "name", "revenue"</dev:code>
+        <dev:remarks>
+          <maml:para>Finds active accounts and re-retrieves them with specific columns. Entity objects bind to -InputObject via pipeline by value.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 4: Pipeline raw Guid from New-PSDataverseRecord ---</maml:title>
+        <dev:code>New-PSDataverseRecord "account" @{ name = "Test" } | Get-PSDataverseRecord "account"</dev:code>
+        <dev:remarks>
+          <maml:para>Creates a new account and immediately retrieves it. The raw Guid output binds to -Id via pipeline by value (ByProperties set).</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Get-PSDataverseRecordCount ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Get-PSDataverseRecordCount</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PSDataverseRecordCount</command:noun>
+      <maml:description>
+        <maml:para>Gets the total count of records in a Dataverse table.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-PSDataverseRecordCount cmdlet returns the number of records in a Dataverse table using an aggregate FetchXML query. An optional filter can be applied to count only matching records.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Get-PSDataverseRecordCount</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Filter</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PrimaryIdAttribute</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the Dataverse table to count records in.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Filter</maml:name>
+        <maml:description>
+          <maml:para>A hashtable of attribute-value pairs used to filter which records are counted. Null values produce an "is null" condition; other values produce an "equals" condition.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PrimaryIdAttribute</maml:name>
+        <maml:description>
+          <maml:para>Primary key attribute to count. Defaults to the Dataverse convention {LogicalName}id; override for tables that break it (e.g. activitypointer uses activityid).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>The number of matching records.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Count all records ---</maml:title>
+        <dev:code>Get-PSDataverseRecordCount -LogicalName "account"</dev:code>
+        <dev:remarks>
+          <maml:para>Returns the total number of account records.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Count with filter ---</maml:title>
+        <dev:code>Get-PSDataverseRecordCount -LogicalName "contact" -Filter @{ statecode = 0 }</dev:code>
+        <dev:remarks>
+          <maml:para>Returns the number of active contact records.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Find-PSDataverseRecord ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Find-PSDataverseRecord</command:name>
+      <command:verb>Find</command:verb>
+      <command:noun>PSDataverseRecord</command:noun>
+      <maml:description>
+        <maml:para>Searches for Dataverse records matching filter criteria.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Find-PSDataverseRecord cmdlet queries a Dataverse table using optional equality filters, LIKE filters, column selection, ordering, and paging. Use -All to retrieve all pages of results, or -Top to limit the number of records returned.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Find-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Filter</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>LikeFilter</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>OrderBy</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Descending</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Top</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>All</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the Dataverse table to query.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Filter</maml:name>
+        <maml:description>
+          <maml:para>A hashtable of attribute-value pairs for equality filtering. Null values produce an "is null" condition.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>LikeFilter</maml:name>
+        <maml:description>
+          <maml:para>A hashtable of attribute-value pairs for LIKE (wildcard) filtering. Use % as the wildcard character.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Columns</maml:name>
+        <maml:description>
+          <maml:para>An array of column logical names to retrieve. If omitted, all columns are returned.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>OrderBy</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the column to sort results by.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Descending</maml:name>
+        <maml:description>
+          <maml:para>When specified with -OrderBy, sorts results in descending order.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Top</maml:name>
+        <maml:description>
+          <maml:para>Maximum number of records to return. Valid range: 1-5000. Default: 50. Ignored when -All is specified.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+        <dev:defaultValue>50</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>All</maml:name>
+        <maml:description>
+          <maml:para>Retrieves all matching records across all pages. Overrides -Top.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>Zero or more Entity objects matching the query criteria.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Find records with equality filter ---</maml:title>
+        <dev:code>Find-PSDataverseRecord -LogicalName "account" -Filter @{ statecode = 0 }</dev:code>
+        <dev:remarks>
+          <maml:para>Returns up to 50 active account records.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Find records with LIKE filter ---</maml:title>
+        <dev:code>Find-PSDataverseRecord -LogicalName "contact" -LikeFilter @{ fullname = "%Smith%" } -Columns "fullname", "emailaddress1"</dev:code>
+        <dev:remarks>
+          <maml:para>Finds contacts whose full name contains "Smith", returning only name and email.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Get all records with sorting ---</maml:title>
+        <dev:code>Find-PSDataverseRecord -LogicalName "account" -All -OrderBy "createdon" -Descending</dev:code>
+        <dev:remarks>
+          <maml:para>Retrieves all account records sorted by creation date in descending order.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Test-PSDataverseRecord ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Test-PSDataverseRecord</command:name>
+      <command:verb>Test</command:verb>
+      <command:noun>PSDataverseRecord</command:noun>
+      <maml:description>
+        <maml:para>Tests whether a Dataverse record exists.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Test-PSDataverseRecord cmdlet checks if a record with the specified logical name and ID exists in Dataverse. Returns $true if the record exists, $false otherwise.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Test-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>Id</maml:name><command:parameterValue required="true">Guid</command:parameterValue><dev:type><maml:name>Guid</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Test-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>Key</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Test-PSDataverseRecord</maml:name><command:parameter required="true" position="named" pipelineInput="True (ByValue)" globbing="false"><maml:name>InputObject</maml:name><command:parameterValue required="true">Entity</command:parameterValue><dev:type><maml:name>Entity</maml:name></dev:type></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="true (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the Dataverse table. Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="true (ByValue, ByPropertyName)" globbing="false">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The unique identifier (GUID) of the record to test. Accepts pipeline input by value or by property name. Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="true (ByValue)" globbing="false">
+        <maml:name>InputObject</maml:name>
+        <maml:description>
+          <maml:para>An Entity object to test for existence. The LogicalName and Id are extracted from the entity. Used in the ByInputObject parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Entity</command:parameterValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Key</maml:name>
+        <maml:description>
+          <maml:para>Alternate key (attribute name = value hashtable) identifying the record instead of -Id.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Boolean</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>$true if the record exists; $false otherwise.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Test if a record exists ---</maml:title>
+        <dev:code>Test-PSDataverseRecord -LogicalName "account" -Id "00000000-0000-0000-0000-000000000001"</dev:code>
+        <dev:remarks>
+          <maml:para>Returns $true if the account exists, $false otherwise.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Use in a condition ---</maml:title>
+        <dev:code>if (Test-PSDataverseRecord "contact" $contactId) {
+    Write-Host "Contact exists."
+}</dev:code>
+        <dev:remarks>
+          <maml:para>Checks for the existence of a contact before proceeding.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Pipeline from Find-PSDataverseRecord ---</maml:title>
+        <dev:code>Find-PSDataverseRecord "account" -Filter @{ statecode = 0 } | Test-PSDataverseRecord</dev:code>
+        <dev:remarks>
+          <maml:para>Tests whether each found account still exists. Entity objects bind to -InputObject via pipeline by value.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== New-PSDataverseRecord ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>New-PSDataverseRecord</command:name>
+      <command:verb>New</command:verb>
+      <command:noun>PSDataverseRecord</command:noun>
+      <maml:description>
+        <maml:para>Creates a new record in a Dataverse table.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The New-PSDataverseRecord cmdlet creates a new record in the specified Dataverse table with the given attributes and returns the GUID of the created record. This cmdlet supports ShouldProcess, so you can use -WhatIf and -Confirm.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>New-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="false" globbing="false"><maml:name>Attributes</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the Dataverse table to create the record in.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="false" globbing="false">
+        <maml:name>Attributes</maml:name>
+        <maml:description>
+          <maml:para>A hashtable of attribute logical names and their values for the new record.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs without actually creating the record.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts for confirmation before creating the record.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Guid</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>The unique identifier of the newly created record.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Create an account ---</maml:title>
+        <dev:code>New-PSDataverseRecord -LogicalName "account" -Attributes @{ name = "Contoso Ltd"; emailaddress1 = "info@contoso.com" }</dev:code>
+        <dev:remarks>
+          <maml:para>Creates a new account record and returns its GUID.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Store the new record ID ---</maml:title>
+        <dev:code>$id = New-PSDataverseRecord "contact" @{ firstname = "John"; lastname = "Doe" }
+Write-Host "Created contact: $id"</dev:code>
+        <dev:remarks>
+          <maml:para>Creates a contact and stores the returned GUID in a variable.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Set-PSDataverseRecord ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Set-PSDataverseRecord</command:name>
+      <command:verb>Set</command:verb>
+      <command:noun>PSDataverseRecord</command:noun>
+      <maml:description>
+        <maml:para>Updates an existing Dataverse record, or upserts it by alternate key.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Set-PSDataverseRecord cmdlet updates the specified attributes of an existing record in a Dataverse table, addressed by Id, by alternate -Key, or by a piped Entity. With -Upsert the record is created when it does not exist. Lookup attributes can be given as nested hashtables @{ LogicalName = ...; Id = ... } or @{ LogicalName = ...; Key = @{ ... } }. Failures are non-terminating errors, so a pipeline of records continues and -ErrorAction decides. This cmdlet supports ShouldProcess, so you can use -WhatIf and -Confirm.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Set-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Id</maml:name><command:parameterValue required="true">Guid</command:parameterValue><dev:type><maml:name>Guid</maml:name></dev:type></command:parameter><command:parameter required="true" position="2" pipelineInput="false" globbing="false"><maml:name>Attributes</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Upsert</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Set-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="2" pipelineInput="false" globbing="false"><maml:name>Attributes</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>Key</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Upsert</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Set-PSDataverseRecord</maml:name><command:parameter required="true" position="2" pipelineInput="false" globbing="false"><maml:name>Attributes</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="True (ByValue)" globbing="false"><maml:name>InputObject</maml:name><command:parameterValue required="true">Entity</command:parameterValue><dev:type><maml:name>Entity</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Upsert</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="true (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the Dataverse table containing the record. Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="true (ByPropertyName)" globbing="false">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The unique identifier (GUID) of the record to update. Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="true (ByValue)" globbing="false">
+        <maml:name>InputObject</maml:name>
+        <maml:description>
+          <maml:para>An Entity object identifying the record to update. The LogicalName and Id are extracted from the entity. Used in the ByInputObject parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Entity</command:parameterValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="2" pipelineInput="false" globbing="false">
+        <maml:name>Attributes</maml:name>
+        <maml:description>
+          <maml:para>A hashtable of attribute logical names and their new values.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>When specified, the cmdlet retrieves and returns the updated entity after the update operation.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs without actually updating the record.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts for confirmation before updating the record.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Key</maml:name>
+        <maml:description>
+          <maml:para>Alternate key (attribute name = value hashtable) identifying the record instead of -Id, e.g. @{ it3c_objectid = $oid }.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Upsert</maml:name>
+        <maml:description>
+          <maml:para>Create the record when it does not exist (UpsertRequest). Outputs a DataverseUpsertResult with the record Id and RecordCreated; with -PassThru the full record is retrieved instead.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None / Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>By default this cmdlet does not produce output. When -PassThru is specified, returns the updated Entity object.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Update an account name ---</maml:title>
+        <dev:code>Set-PSDataverseRecord -LogicalName "account" -Id $accountId -Attributes @{ name = "Contoso Inc" }</dev:code>
+        <dev:remarks>
+          <maml:para>Updates the name of an existing account record.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Update multiple attributes ---</maml:title>
+        <dev:code>Set-PSDataverseRecord "contact" $contactId @{ firstname = "Jane"; lastname = "Smith"; emailaddress1 = "jane@contoso.com" }</dev:code>
+        <dev:remarks>
+          <maml:para>Updates multiple attributes of a contact record using positional parameters.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Pipeline from Find-PSDataverseRecord ---</maml:title>
+        <dev:code>Find-PSDataverseRecord "account" -Filter @{ statecode = 0 } | Set-PSDataverseRecord -Attributes @{ description = "Active account" }</dev:code>
+        <dev:remarks>
+          <maml:para>Finds all active accounts and updates their description. Entity objects bind to -InputObject via pipeline by value.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 4: Update and return the updated entity ---</maml:title>
+        <dev:code>$updated = Set-PSDataverseRecord "account" $accountId @{ name = "New Name" } -PassThru
+$updated.name</dev:code>
+        <dev:remarks>
+          <maml:para>Updates the account name and returns the full updated entity using -PassThru.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Remove-PSDataverseRecord ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Remove-PSDataverseRecord</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>PSDataverseRecord</command:noun>
+      <maml:description>
+        <maml:para>Deletes a record from a Dataverse table.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Remove-PSDataverseRecord cmdlet deletes a record from a Dataverse table by its logical name and ID. This cmdlet supports ShouldProcess with a high confirm impact, so it prompts for confirmation by default.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Remove-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Id</maml:name><command:parameterValue required="true">Guid</command:parameterValue><dev:type><maml:name>Guid</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Remove-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>Key</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Remove-PSDataverseRecord</maml:name><command:parameter required="true" position="named" pipelineInput="True (ByValue)" globbing="false"><maml:name>InputObject</maml:name><command:parameterValue required="true">Entity</command:parameterValue><dev:type><maml:name>Entity</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="true (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>The logical name of the Dataverse table containing the record. Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="true (ByPropertyName)" globbing="false">
+        <maml:name>Id</maml:name>
+        <maml:description>
+          <maml:para>The unique identifier (GUID) of the record to delete. Used in the ByProperties parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Guid</command:parameterValue>
+        <dev:type>
+          <maml:name>Guid</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="true (ByValue)" globbing="false">
+        <maml:name>InputObject</maml:name>
+        <maml:description>
+          <maml:para>An Entity object identifying the record to delete. The LogicalName and Id are extracted from the entity. Used in the ByInputObject parameter set.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Entity</command:parameterValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>When specified, the cmdlet returns $true after a successful deletion.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs without actually deleting the record.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts for confirmation before deleting the record.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Key</maml:name>
+        <maml:description>
+          <maml:para>Alternate key (attribute name = value hashtable) identifying the record instead of -Id.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable</maml:name>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None / System.Boolean</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>By default this cmdlet does not produce output. When -PassThru is specified, returns $true after a successful deletion.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Delete a record ---</maml:title>
+        <dev:code>Remove-PSDataverseRecord -LogicalName "account" -Id $accountId -Confirm:$false</dev:code>
+        <dev:remarks>
+          <maml:para>Deletes an account record, suppressing the confirmation prompt.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Preview deletion with WhatIf ---</maml:title>
+        <dev:code>Remove-PSDataverseRecord -LogicalName "contact" -Id $contactId -WhatIf</dev:code>
+        <dev:remarks>
+          <maml:para>Shows what would happen without actually deleting the contact.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Pipeline from Find-PSDataverseRecord ---</maml:title>
+        <dev:code>Find-PSDataverseRecord "account" -Filter @{ statecode = 1 } | Remove-PSDataverseRecord -Confirm:$false</dev:code>
+        <dev:remarks>
+          <maml:para>Finds all inactive accounts and deletes them. Entity objects bind to -InputObject via pipeline by value.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 4: Pipeline from Invoke-PSDataverseFetchXml ---</maml:title>
+        <dev:code>Invoke-PSDataverseFetchXml $fetchXml | Remove-PSDataverseRecord -Confirm:$false</dev:code>
+        <dev:remarks>
+          <maml:para>Queries records with FetchXML and deletes all results. Entity objects bind to -InputObject via pipeline.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 5: Delete with PassThru for logging ---</maml:title>
+        <dev:code>Find-PSDataverseRecord "account" -Filter @{ statecode = 1 } | Remove-PSDataverseRecord -PassThru -Confirm:$false | ForEach-Object { Write-Host "Deleted: $_" }</dev:code>
+        <dev:remarks>
+          <maml:para>Deletes inactive accounts and uses -PassThru to confirm each deletion in the pipeline.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Invoke-PSDataverseBatch ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Invoke-PSDataverseBatch</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>PSDataverseBatch</command:noun>
+      <maml:description>
+        <maml:para>Executes a batch of Dataverse operations (create/update/upsert/delete).</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Invoke-PSDataverseBatch cmdlet sends multiple create, update, upsert, and delete operations to Dataverse in a single ExecuteMultiple request. Each operation is a hashtable with Action (Create, Update, Upsert, Delete), LogicalName, and Id or Key (alternate key hashtable) plus Attributes; lookups are written as nested hashtables @{ LogicalName = ...; Id = ... } or @{ LogicalName = ...; Key = @{ ... } }. The cmdlet returns a typed DataverseBatchResult with success and failure counts and one Items entry per operation (Index, Action, LogicalName, Id, Succeeded, RecordCreated, ErrorCode, Message). The cmdlet supports ShouldProcess with medium confirm impact.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Invoke-PSDataverseBatch</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Operations</maml:name><command:parameterValue required="true">Hashtable[]</command:parameterValue><dev:type><maml:name>Hashtable[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ContinueOnError</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>Operations</maml:name>
+        <maml:description>
+          <maml:para>An array of hashtables defining the operations. Each hashtable must contain: Action (Create/Update/Delete), LogicalName, and optionally Id (required for Update/Delete) and Attributes (a nested hashtable of column values).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable[]</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>ContinueOnError</maml:name>
+        <maml:description>
+          <maml:para>When specified, the batch continues processing remaining operations even if one fails.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs without actually executing the batch.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts for confirmation before executing the batch.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Isystem.PowerShell.PowerPlatform.Dataverse.Models.DataverseBatchResult</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>A typed object with TotalRequests, SuccessCount, FailureCount, IsFullSuccess, Items (per-operation outcome with the record Id, ErrorCode and Message) and optionally Errors.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Batch create and update ---</maml:title>
+        <dev:code>$ops = @(
+    @{ Action = "Create"; LogicalName = "account"; Attributes = @{ name = "Contoso" } }
+    @{ Action = "Update"; LogicalName = "contact"; Id = $contactId; Attributes = @{ lastname = "Smith" } }
+    @{ Action = "Delete"; LogicalName = "account"; Id = $oldAccountId }
+)
+$result = Invoke-PSDataverseBatch -Operations $ops -ContinueOnError
+$result.SuccessCount</dev:code>
+        <dev:remarks>
+          <maml:para>Executes a batch of mixed operations and checks the success count.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Invoke-PSDataverseTransaction ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Invoke-PSDataverseTransaction</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>PSDataverseTransaction</command:noun>
+      <maml:description>
+        <maml:para>Executes Dataverse operations in a single atomic transaction.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Invoke-PSDataverseTransaction cmdlet sends multiple create, update, upsert, and delete operations to Dataverse as a single atomic transaction using ExecuteTransaction. If any operation fails, all operations are rolled back. Each operation is a hashtable with Action (Create, Update, Upsert, Delete), LogicalName, and Id or Key (alternate key hashtable) plus Attributes; lookups are written as nested hashtables @{ LogicalName = ...; Id = ... } or @{ LogicalName = ...; Key = @{ ... } }. The cmdlet supports ShouldProcess with medium confirm impact.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Invoke-PSDataverseTransaction</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Operations</maml:name><command:parameterValue required="true">Hashtable[]</command:parameterValue><dev:type><maml:name>Hashtable[]</maml:name></dev:type></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>Operations</maml:name>
+        <maml:description>
+          <maml:para>An array of hashtables defining the operations. Each hashtable must contain: Action (Create/Update/Delete), LogicalName, and optionally Id (required for Update/Delete) and Attributes (a nested hashtable of column values).</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Hashtable[]</command:parameterValue>
+        <dev:type>
+          <maml:name>Hashtable[]</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what would happen if the cmdlet runs without actually executing the transaction.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts for confirmation before executing the transaction.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Int32</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>The number of operations that were committed in the transaction.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Execute operations in a transaction ---</maml:title>
+        <dev:code>$ops = @(
+    @{ Action = "Create"; LogicalName = "account"; Attributes = @{ name = "Contoso" } }
+    @{ Action = "Create"; LogicalName = "contact"; Attributes = @{ firstname = "John"; lastname = "Doe" } }
+)
+Invoke-PSDataverseTransaction -Operations $ops</dev:code>
+        <dev:remarks>
+          <maml:para>Creates an account and a contact atomically. If either fails, both are rolled back.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Preview with WhatIf ---</maml:title>
+        <dev:code>Invoke-PSDataverseTransaction -Operations $ops -WhatIf</dev:code>
+        <dev:remarks>
+          <maml:para>Shows the number of operations that would be executed without committing.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Invoke-PSDataverseFetchXml ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Invoke-PSDataverseFetchXml</command:name>
+      <command:verb>Invoke</command:verb>
+      <command:noun>PSDataverseFetchXml</command:noun>
+      <maml:description>
+        <maml:para>Queries Dataverse records using FetchXML.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Invoke-PSDataverseFetchXml cmdlet executes a FetchXML query against Dataverse and returns the matching Entity objects. The FetchXML is validated for well-formedness before execution. Use -All to automatically page through all results.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Invoke-PSDataverseFetchXml</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue)" globbing="false"><maml:name>FetchXml</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>All</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="true (ByValue)" globbing="false">
+        <maml:name>FetchXml</maml:name>
+        <maml:description>
+          <maml:para>The FetchXML query string. Must be well-formed XML.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>All</maml:name>
+        <maml:description>
+          <maml:para>Retrieves all matching records across all pages using paging cookies.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>Microsoft.Xrm.Sdk.Entity</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>Zero or more Entity objects matching the FetchXML query.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Execute a FetchXML query ---</maml:title>
+        <dev:code>$fetchXml = @"
+&lt;fetch top="10"&gt;
+  &lt;entity name="account"&gt;
+    &lt;attribute name="name" /&gt;
+    &lt;attribute name="emailaddress1" /&gt;
+  &lt;/entity&gt;
+&lt;/fetch&gt;
+"@
+Invoke-PSDataverseFetchXml -FetchXml $fetchXml</dev:code>
+        <dev:remarks>
+          <maml:para>Retrieves the top 10 accounts with name and email columns.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Retrieve all pages ---</maml:title>
+        <dev:code>Invoke-PSDataverseFetchXml -FetchXml $fetchXml -All</dev:code>
+        <dev:remarks>
+          <maml:para>Retrieves all matching records across multiple pages.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 3: Pipeline input ---</maml:title>
+        <dev:code>Get-Content "query.xml" -Raw | Invoke-PSDataverseFetchXml</dev:code>
+        <dev:remarks>
+          <maml:para>Reads FetchXML from a file and pipes it to the cmdlet.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <!-- ==================== Get-PSDataverseTokenCache ==================== -->
+  <command:command>
+    <command:details>
+      <command:name>Get-PSDataverseTokenCache</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>PSDataverseTokenCache</command:noun>
+      <maml:description>
+        <maml:para>Exports the delegated token cache of the current (or last) session.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Get-PSDataverseTokenCache cmdlet returns the serialized MSAL token cache of a session opened with Connect-PSDataverse -Delegated, as one opaque string (prefix PSDVTC1: followed by base64). The refresh token lives inside that cache and MSAL may rotate it during a session, so persist the value after the work is done - to Azure Key Vault (for example through PSDataRepository), a file, or any other secret store - and pass it back through Connect-PSDataverse -TokenCache on the next run. The value stays available after Disconnect-PSDataverse until the next Connect-PSDataverse. Treat it as a credential.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Get-PSDataverseTokenCache</maml:name></command:syntaxItem>
+    </command:syntax>
+    <command:parameters />
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>The serialized token cache envelope.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Persist the cache to Key Vault after a sync ---</maml:title>
+        <dev:code>Get-PSDataverseTokenCache | Set-PSDataRepositoryItem -Name 'dataverse-tokencache'</dev:code>
+        <dev:remarks>
+          <maml:para>Stores the (possibly rotated) cache so the next unattended run can sign in silently.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+</helpItems>

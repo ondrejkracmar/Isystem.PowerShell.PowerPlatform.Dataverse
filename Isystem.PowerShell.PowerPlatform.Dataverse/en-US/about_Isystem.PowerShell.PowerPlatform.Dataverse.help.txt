@@ -1,0 +1,86 @@
+﻿TOPIC
+    about_Isystem.PowerShell.PowerPlatform.Dataverse
+
+SHORT DESCRIPTION
+    Session-based PowerShell cmdlets for Microsoft Dataverse (Power Platform,
+    Dynamics 365): connect, query, CRUD, upsert by alternate key, batches,
+    transactions and FetchXML.
+
+LONG DESCRIPTION
+    The module wraps the official Dataverse SDK (ServiceClient). One connection
+    is kept per runspace; every other cmdlet uses it.
+
+    CONNECTING
+
+        Connect-PSDataverse -ConnectionString $secureString
+        Connect-PSDataverse -Url $url -ClientId $id -ClientSecret $secret
+        Connect-PSDataverse -Url $url -ClientId $id -CertificateThumbprint $thumb
+        Connect-PSDataverse -Url $url -ManagedIdentity
+        Connect-PSDataverse -Url $url -AuthMode <mode>      # Isystem.AzAuth
+        Connect-PSDataverse -Url $url -Delegated            # user sign-in, portable cache
+
+    -AuthMode uses the same mode names as PSDataRepository (ClientSecret,
+    ClientCertificate, ManagedIdentity, WorkloadIdentity, NonInteractive,
+    Interactive, DeviceCode, Cache).
+
+    -Delegated is for environments without application users (Dataverse for
+    Teams, no premium licence). The MSAL token cache lives in memory; export it
+    with Get-PSDataverseTokenCache, keep it in a secret store and pass it back
+    with -TokenCache next time. -LoginMode Silent makes an unattended run fail
+    fast when the cache is unusable.
+
+    RECORDS
+
+        Get-PSDataverseRecord    account $id
+        Get-PSDataverseRecord    account -Key @{ accountnumber = 'A-1' }
+        New-PSDataverseRecord    account @{ name = 'Acme' }
+        Set-PSDataverseRecord    account -Key @{ accountnumber = 'A-1' } -Upsert -Attributes @{ name = 'Acme' }
+        Remove-PSDataverseRecord account $id
+        Test-PSDataverseRecord   account $id
+
+    Per-record failures are non-terminating errors: a pipeline of records
+    continues and -ErrorAction decides. Connection, query, batch and
+    transaction failures terminate.
+
+    LOOKUPS
+
+    Lookup columns take a hashtable instead of an EntityReference:
+
+        @{ LogicalName = 'account'; Id = $guid }
+        @{ LogicalName = 'it3c_company'; Key = @{ it3c_name = 'Acme' } }
+
+    The second form is the SDK equivalent of an OData @odata.bind by alternate
+    key.
+
+    QUERIES
+
+        Find-PSDataverseRecord account -Filter @{ statecode = 0 } -Top 100
+        Find-PSDataverseRecord account -LikeFilter @{ name = 'A%' } -All
+        Invoke-PSDataverseFetchXml $fetchXml -All
+        Get-PSDataverseRecordCount account -Filter @{ statecode = 0 }
+
+    BULK
+
+        Invoke-PSDataverseBatch       -Operations $ops -ContinueOnError
+        Invoke-PSDataverseTransaction -Operations $ops
+
+    An operation is a hashtable: @{ Action = 'Create'|'Update'|'Upsert'|'Delete';
+    LogicalName = ...; Id = ... or Key = @{ ... }; Attributes = @{ ... } }.
+    Both cmdlets return a DataverseBatchResult whose Items carry the outcome,
+    record id, error code and message per operation, in input order.
+
+    SESSION
+
+        Get-PSDataverseConnection
+        Get-PSDataverseTokenCache
+        Disconnect-PSDataverse
+
+MODULE LOADING
+    The manifest's root module is a small .psm1 that loads bin/net9.0 on
+    PowerShell 7.5 and bin/net10.0 on PowerShell 7.6+. On PowerShell 7.5 import
+    this module before PSSqlRepository / PSDataRepository so the shared
+    Microsoft.Extensions.* assemblies resolve at the higher version.
+
+SEE ALSO
+    Get-Help Connect-PSDataverse -Full
+    https://learn.microsoft.com/power-apps/developer/data-platform/
