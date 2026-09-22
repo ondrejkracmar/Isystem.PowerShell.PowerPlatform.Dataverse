@@ -9,6 +9,14 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 _Nothing yet._
 
+## [1.0.1] - 2026-09-21
+
+### Fixed
+- README shipped with 1.0.0 still described a source build and `bin/` import - meaningless on
+  the GitHub mirror, which carries no source. It now opens with the mirror notice, installs from
+  the PowerShell Gallery, and documents the Isystem.AzAuth and delegated (portable token cache)
+  authentication modes and the upsert section that 1.0.0 introduced. No code changes.
+
 ## [1.0.0] - 2026-09-21
 
 First public release (PowerShell Gallery). Breaking changes against the internal 0.1.0 are listed under **Changed**.

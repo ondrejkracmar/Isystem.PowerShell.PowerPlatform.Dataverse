@@ -5,7 +5,7 @@ HelpInfoUri:
 Locale: en-US
 Module Guid: 4f78bc29-fd8d-444c-a449-a244eeb23a79
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/21/2026
+ms.date: 09/22/2026
 PlatyPS schema version: 2024-05-01
 title: Isystem.PowerShell.PowerPlatform.Dataverse Module
 ---

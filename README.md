@@ -4,6 +4,11 @@ PowerShell binary module for **Microsoft Dataverse** (Power Platform, Dynamics 3
 
 Ships `net9.0` and `net10.0` builds; the loader picks the one matching your PowerShell (7.5 / 7.6+). Assemblies are strong-named. See [CHANGELOG.md](CHANGELOG.md), [SECURITY.md](SECURITY.md) and [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 
+> **Reading this on GitHub?** This repository is a published mirror: it carries the compiled
+> module and its documentation, but no source and no build. Source, pipeline and issues live in
+> Azure DevOps (`i-system/PSModules/Isystem.PowerShell.PowerPlatform`). Install from the
+> PowerShell Gallery as shown below.
+
 ---
 
 ## Table of Contents
@@ -29,6 +34,8 @@ Ships `net9.0` and `net10.0` builds; the loader picks the one matching your Powe
   - [Client Secret (Service Principal)](#client-secret-service-principal)
   - [Certificate](#certificate)
   - [Managed Identity](#managed-identity)
+  - [Isystem.AzAuth Modes](#isystemazauth-modes)
+  - [Delegated Sign-in with a Portable Token Cache](#delegated-sign-in-with-a-portable-token-cache)
 - [Quick Start](#quick-start)
 - [Module Documentation](#module-documentation)
 - [Cmdlet Reference](#cmdlet-reference)
@@ -40,10 +47,11 @@ Ships `net9.0` and `net10.0` builds; the loader picks the one matching your Powe
   - [Pipeline Support](#pipeline-support)
   - [Paging (All Records)](#paging-all-records)
   - [Batch Operations](#batch-operations)
+  - [Upsert by Alternate Key (idempotent sync)](#upsert-by-alternate-key-idempotent-sync)
   - [Transactions](#transactions)
   - [FetchXML](#fetchxml)
   - [Retry Configuration](#retry-configuration)
-- [Building from Source](#building-from-source)
+- [Development](#development)
 - [License](#license)
 
 ---
@@ -51,9 +59,12 @@ Ships `net9.0` and `net10.0` builds; the loader picks the one matching your Powe
 ## Features
 
 - **Session-based connection** with per-runspace isolation (thread-safe)
-
+- **Six ways to authenticate** — connection string, client secret, certificate, managed identity, [Isystem.AzAuth](#isystemazauth-modes) modes (`-AuthMode`, same names as PSDataRepository: WorkloadIdentity, NonInteractive, Interactive, DeviceCode, …), and a **delegated sign-in with a portable token cache** (`-Delegated`) for environments that have no application users
 - **Full CRUD** — Create, Read, Update, Delete with pipeline and `InputObject` support
-- **Bulk operations** — `Invoke-PSDataverseBatch` (parallel with `ContinueOnError`) and `Invoke-PSDataverseTransaction` (atomic rollback)
+- **Upsert and alternate keys** — `Set-PSDataverseRecord -Key @{…} -Upsert`; `-Key` on Get/Set/Remove/Test; `Action = 'Upsert'` in batches
+- **Lookups without SDK types** — `@{ LogicalName = 'account'; Id = $id }` or `@{ LogicalName = 'x'; Key = @{ … } }` becomes an `EntityReference` (the `@odata.bind` equivalent)
+- **Bulk operations** — `Invoke-PSDataverseBatch` (`ContinueOnError`) and `Invoke-PSDataverseTransaction` (atomic rollback), both returning one structured result item per operation (id, error code, message)
+- **Non-terminating per-record errors** — a pipeline of records keeps going; `-ErrorAction` decides
 - **FetchXML** — `Invoke-PSDataverseFetchXml` with automatic paging
 - **Automatic paging** — `-All` switch retrieves all records across pages (5 000 per page)
 - **Record existence check** — `Test-PSDataverseRecord` returns `$true` / `$false`
@@ -71,36 +82,26 @@ Ships `net9.0` and `net10.0` builds; the loader picks the one matching your Powe
 
 | Requirement | Version |
 |---|---|
-| PowerShell | 7.5+ (Core edition) |
-| .NET Runtime | 9.0 |
+| PowerShell | 7.5 (uses the `net9.0` build) or 7.6+ (uses the `net10.0` build) |
+| .NET Runtime | 9.0 or 10.0 |
 | Dataverse | Any environment (Production, Sandbox, Developer, Teams) |
 
-> Note: Shared .NET libraries may be multi-targeted (`net9.0;net10.0`), and the module package is built from the `net9.0` variant to stay compatible with referenced shared dependencies.
+No PowerShell module dependencies. The Dataverse SDK, MSAL and Isystem.AzAuth are bundled inside the module.
 
-No additional PowerShell module dependencies. All Dataverse SDK assemblies are bundled inside the module.
+> **Side by side with PSSqlRepository / PSDataRepository on PowerShell 7.5:** import this module first. Its 9.x `Microsoft.Extensions.*` assemblies satisfy their 8.x references, not the other way round. On 7.6+ all three ship 10.x and order does not matter.
 
 ---
 
 ## Installation
 
-### From Build Output
+### From the PowerShell Gallery
 
 ```powershell
-# Build the module
-dotnet build src/Isystem.PowerShell.PowerPlatform.sln
-
-# Import from the bin/ directory
-Import-Module ./src/Isystem.PowerShell.PowerPlatform.Dataverse/bin/Isystem.PowerShell.PowerPlatform.Dataverse.psd1
-```
-
-### From NuGet Package (CI/CD)
-
-The Azure Pipelines pipeline produces a `.nupkg` that can be published to an Azure Artifacts feed or PSGallery. Once published:
-
-```powershell
-Install-Module -Name Isystem.PowerShell.PowerPlatform.Dataverse -Repository YourFeed
+Install-PSResource Isystem.PowerShell.PowerPlatform.Dataverse -Repository PSGallery   # or: Install-Module
 Import-Module Isystem.PowerShell.PowerPlatform.Dataverse
 ```
+
+The same package is published to the i-system Azure Artifacts feed for internal pipelines. The manifest's root module is a small `.psm1` loader that picks `bin/net9.0` or `bin/net10.0` for the running PowerShell.
 
 ### Verify Installation
 
@@ -407,12 +408,51 @@ Connect-PSDataverse -Url "https://yourorg.crm4.dynamics.com" -ManagedIdentity `
                     -ManagedIdentityId "zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz"
 ```
 
+### Isystem.AzAuth Modes
+
+`-AuthMode` acquires tokens through Isystem.AzAuth with the same mode names PSDataRepository uses, so one configuration vocabulary covers both modules:
+
+| Mode | Parameters | Typical host |
+|---|---|---|
+| `ClientSecret` | `-ClientId -TenantId -ClientSecret` | pipelines |
+| `ClientCertificate` | `-ClientId -TenantId` + `-CertificateThumbprint` / `-CertificatePath` / `-Certificate` | pipelines, servers |
+| `ManagedIdentity` | optional `-ClientId` (user-assigned) | Azure VM, Functions, Container Apps |
+| `WorkloadIdentity` | `-ClientId -TenantId -ExternalToken` | AKS, GitHub Actions |
+| `NonInteractive` | optional `-TenantId` | Azure.Identity default chain (env, MI, Azure CLI, Azure PowerShell) |
+| `Interactive` / `DeviceCode` | optional `-TokenCacheName` | developer box / headless bootstrap |
+| `Cache` | `-TokenCacheName -Username` | silent from a named on-disk cache |
+
+```powershell
+Connect-PSDataverse -Url $url -AuthMode WorkloadIdentity -ClientId $appId -TenantId $tenant -ExternalToken $federatedToken
+Connect-PSDataverse -Url $url -AuthMode DeviceCode -TokenCacheName 'dataverse'
+Connect-PSDataverse -Url $url -AuthMode Cache -TokenCacheName 'dataverse' -Username 'jane@contoso.com'
+```
+
+### Delegated Sign-in with a Portable Token Cache
+
+For environments **without application users** - Dataverse for Teams, or any tenant where no premium licence allows a service principal - the only option is a user identity. `-Delegated` signs the user in through MSAL and keeps the token cache **in memory**; `Get-PSDataverseTokenCache` exports it as one opaque string that you store wherever you keep secrets, and `-TokenCache` seeds the next session with it. The refresh token never touches the disk through this module.
+
+```powershell
+# One-time bootstrap on a workstation (browser sign-in), then store the cache:
+Connect-PSDataverse -Url $url -Delegated -LoginMode Interactive
+Get-PSDataverseTokenCache | Set-PSDataRepositorySecret -Name 'dataverse-tokencache'   # Key Vault via PSDataRepository
+
+# Every unattended run: seed, work, persist the (possibly rotated) cache:
+$cache = Get-PSDataRepositorySecret -Name 'dataverse-tokencache'
+Connect-PSDataverse -Url $url -Delegated -TokenCache $cache -LoginMode Silent
+# ... sync ...
+Get-PSDataverseTokenCache | Set-PSDataRepositorySecret -Name 'dataverse-tokencache'
+Disconnect-PSDataverse
+```
+
+`-LoginMode Silent` makes an unusable cache (expired or revoked refresh token) fail immediately with a clear error instead of prompting; `DeviceCode` bootstraps on a headless host. `-ClientId` defaults to Microsoft's public Dataverse client (`51f81489-12ee-4a9e-aaae-a2591f45987d`), which needs no app registration. **Treat the exported cache as a credential** - see [SECURITY.md](SECURITY.md).
+
 ---
 
 ## Quick Start
 
 ```powershell
-Import-Module ./src/Isystem.PowerShell.PowerPlatform.Dataverse/bin/Isystem.PowerShell.PowerPlatform.Dataverse.psd1
+Import-Module Isystem.PowerShell.PowerPlatform.Dataverse
 
 # 1. Connect
 $cs = ConvertTo-SecureString "AuthType=OAuth;Url=https://yourorg.crm4.dynamics.com;LoginPrompt=Auto;AppId=51f81489-12ee-4a9e-aaae-a2591f45987d;RedirectUri=http://localhost" -AsPlainText -Force
@@ -669,23 +709,9 @@ For custom tables, the logical name typically follows the pattern `prefix_tablen
 
 ---
 
-## Building from Source
+## Development
 
-```powershell
-# Clone and build
-cd C:\Projects\PSModules\Isystem.PowerShell.PowerPlatform
-dotnet build src/Isystem.PowerShell.PowerPlatform.sln
-
-# Run xUnit tests (net9.0 + net10.0)
-dotnet test src/Isystem.PowerShell.PowerPlatform.sln
-
-# Run Pester tests
-pwsh -File src/tests/pester.ps1
-
-# Import the built module
-Import-Module ./src/Isystem.PowerShell.PowerPlatform.Dataverse/bin/Isystem.PowerShell.PowerPlatform.Dataverse.psd1
-Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
-```
+Source, build instructions and contributions live in the Azure DevOps repository (`i-system/PSModules/Isystem.PowerShell.PowerPlatform`, see its `CONTRIBUTING.md`). This README is published alongside the compiled module, so build steps are documented where the source they refer to actually is.
 
 ---
 
