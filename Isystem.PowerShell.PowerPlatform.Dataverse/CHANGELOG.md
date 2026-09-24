@@ -7,7 +7,32 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
-_Nothing yet._
+## [1.1.0] - 2026-09-24
+
+### Added
+
+- **Metadata cmdlets**: `Get-PSDataverseTable`, `Get-PSDataverseColumn` and `Get-PSDataverseKey`.
+  They answer the question behind the SDK's most common error - *the entity with a name = X was not
+  found in the MetadataCache* - by showing the logical names that exist in the environment you are
+  connected to, which columns are writable (calculated, rollup and system columns read fine and are
+  rejected on write), and whether an alternate key's index is `Active`, without which an upsert by
+  key fails with a message that never mentions the index. An exact table name costs one metadata
+  request; a wildcard reads the catalogue, because the metadata service has no server-side name
+  filter. System tables are excluded unless `-IncludeSystem` is given.
+- `Get-PSDataverseTable` output pipes into the query cmdlets:
+  `Get-PSDataverseTable it3c_* | Find-PSDataverseRecord -Top 5` and
+  `... | Get-PSDataverseRecordCount` now work, the latter taking the real primary key column from
+  the metadata rather than assuming the `{table}id` convention.
+
+### Changed
+
+- `Find-PSDataverseRecord -LogicalName` and `Get-PSDataverseRecordCount -LogicalName` /
+  `-PrimaryIdAttribute` bind from the pipeline by property name, which is what makes the two
+  pipelines above work.
+- The pipeline no longer runs on pushes to `main`: the required build-validation policy already
+  validates the same content on the pull-request merge ref, so a merge - and a release tag on the
+  same commit - used to queue two or three identical runs. Triggers are now the pull request and the
+  `v*` tag only.
 
 ## [1.0.1] - 2026-09-21
 

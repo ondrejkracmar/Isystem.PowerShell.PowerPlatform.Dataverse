@@ -69,6 +69,7 @@ Ships `net9.0` and `net10.0` builds; the loader picks the one matching your Powe
 - **Automatic paging** — `-All` switch retrieves all records across pages (5 000 per page)
 - **Record existence check** — `Test-PSDataverseRecord` returns `$true` / `$false`
 - **Record count** — `Get-PSDataverseRecordCount` with optional filter
+- **Table metadata** — `Get-PSDataverseTable`, `Get-PSDataverseColumn`, `Get-PSDataverseKey`: the logical name the other cmdlets need, which columns are actually writable, and whether an alternate key's index is `Active`
 - **Like filters** — wildcard search via `-LikeFilter` on `Find-PSDataverseRecord`
 - **ShouldProcess** — `Remove-PSDataverseRecord`, `Invoke-PSDataverseBatch`, and `Invoke-PSDataverseTransaction` support `-WhatIf` and `-Confirm`
 - **SecureString** — `ConnectionString` and `ClientSecret` parameters accept `SecureString` only
@@ -108,7 +109,7 @@ The same package is published to the i-system Azure Artifacts feed for internal 
 ```powershell
 Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 
-# Should list all 14 cmdlets:
+# Should list all 17 cmdlets:
 #   Connect-PSDataverse          Disconnect-PSDataverse
 #   Get-PSDataverseConnection    Get-PSDataverseTokenCache
 #   Get-PSDataverseRecord        Get-PSDataverseRecordCount
@@ -116,6 +117,8 @@ Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 #   New-PSDataverseRecord        Set-PSDataverseRecord
 #   Remove-PSDataverseRecord     Invoke-PSDataverseBatch
 #   Invoke-PSDataverseTransaction Invoke-PSDataverseFetchXml
+#   Get-PSDataverseTable         Get-PSDataverseColumn
+#   Get-PSDataverseKey
 ```
 
 ---
@@ -718,3 +721,52 @@ Source, build instructions and contributions live in the Azure DevOps repository
 ## License
 
 [MIT](LICENSE)
+
+## Finding your way around an environment
+
+The name every cmdlet takes is the **logical** name: lower-case, singular, with the publisher
+prefix. The maker portal shows a display name ("Person") and a plural collection name
+("it3c_persons"), and neither of those works — which is what the SDK means by
+`The entity with a name = 'X' ... was not found in the MetadataCache`. The same message appears
+when the table simply is not in the environment you are connected to, so start by checking both:
+
+```powershell
+Get-PSDataverseConnection | Format-List Url, OrganizationFriendlyName, EnvironmentId
+
+# every custom table in this environment
+Get-PSDataverseTable
+
+# just yours, by prefix
+Get-PSDataverseTable it3c_*
+
+# one table, without reading the whole catalogue
+Get-PSDataverseTable it3c_person
+```
+
+The output pipes into the query cmdlets, so a first look at the data is one line:
+
+```powershell
+Get-PSDataverseTable it3c_* | Find-PSDataverseRecord -Top 5      # first rows of every table
+Get-PSDataverseTable it3c_* | Get-PSDataverseRecordCount         # row counts
+```
+
+`Get-PSDataverseRecordCount` normally assumes the primary key is `{table}id`; piped this way it
+takes the real one from the table metadata, so tables that break the convention are counted
+correctly.
+
+Before writing, check what a column will accept — a retrieved record only shows the columns that
+have a value, while this shows the table as defined:
+
+```powershell
+Get-PSDataverseColumn it3c_person -Writable            # what create/update will accept
+Get-PSDataverseColumn it3c_person it3c_*id             # lookups, with their Targets
+```
+
+And before upserting by key, check the key's index. An upsert against a key whose index is still
+`Pending` fails with a message that never mentions the index:
+
+```powershell
+Get-PSDataverseKey it3c_person
+Get-PSDataverseTable it3c_* | Get-PSDataverseKey | Where-Object IndexStatus -ne 'Active'
+```
+

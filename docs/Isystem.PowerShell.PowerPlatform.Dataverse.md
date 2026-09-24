@@ -5,7 +5,7 @@ HelpInfoUri:
 Locale: en-US
 Module Guid: 4f78bc29-fd8d-444c-a449-a244eeb23a79
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/22/2026
+ms.date: 09/24/2026
 PlatyPS schema version: 2024-05-01
 title: Isystem.PowerShell.PowerPlatform.Dataverse Module
 ---
@@ -30,9 +30,17 @@ Disconnects from the current Dataverse environment.
 
 Searches for Dataverse records matching filter criteria.
 
+### [Get-PSDataverseColumn](Get-PSDataverseColumn.md)
+
+Gets the columns of a Dataverse table, with their types and writability.
+
 ### [Get-PSDataverseConnection](Get-PSDataverseConnection.md)
 
 Gets the current Dataverse connection information.
+
+### [Get-PSDataverseKey](Get-PSDataverseKey.md)
+
+Gets the alternate keys of a Dataverse table and the state of their indexes.
 
 ### [Get-PSDataverseRecord](Get-PSDataverseRecord.md)
 
@@ -41,6 +49,10 @@ Gets a Dataverse record by ID or alternate key.
 ### [Get-PSDataverseRecordCount](Get-PSDataverseRecordCount.md)
 
 Gets the total count of records in a Dataverse table.
+
+### [Get-PSDataverseTable](Get-PSDataverseTable.md)
+
+Gets Dataverse table metadata: logical name, primary key and name columns, entity set.
 
 ### [Get-PSDataverseTokenCache](Get-PSDataverseTokenCache.md)
 
