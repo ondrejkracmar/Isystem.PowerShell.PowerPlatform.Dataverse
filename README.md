@@ -17,7 +17,7 @@ Ships `net9.0` and `net10.0` builds; the loader picks the one matching your Powe
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Dataverse Environment Setup](#dataverse-environment-setup)
-  - [Create a Dataverse Environment](#create-a-dataverse-environment)
+  - [Create a Dataverse Environment](#create-a-full-dataverse-environment)
   - [Dataverse for Microsoft Teams](#dataverse-for-microsoft-teams)
   - [Register an App for Authentication](#register-an-app-for-authentication)
   - [Service-to-Service (API) Setup — Detailed Procedure](#service-to-service-api-setup--detailed-procedure)
@@ -109,7 +109,7 @@ The same package is published to the i-system Azure Artifacts feed for internal 
 ```powershell
 Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 
-# Should list all 17 cmdlets:
+# Should list all 18 cmdlets:
 #   Connect-PSDataverse          Disconnect-PSDataverse
 #   Get-PSDataverseConnection    Get-PSDataverseTokenCache
 #   Get-PSDataverseRecord        Get-PSDataverseRecordCount
@@ -118,7 +118,7 @@ Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 #   Remove-PSDataverseRecord     Invoke-PSDataverseBatch
 #   Invoke-PSDataverseTransaction Invoke-PSDataverseFetchXml
 #   Get-PSDataverseTable         Get-PSDataverseColumn
-#   Get-PSDataverseKey
+#   Get-PSDataverseKey           ConvertTo-PSDataverseObject
 ```
 
 ---
@@ -691,6 +691,44 @@ Get-PSDataverseRecord -LogicalName "account" -Id $id -Columns @("name", "emailad
 # Find with specific columns
 Find-PSDataverseRecord -LogicalName "account" -Filter @{ statecode = 0 } -Columns @("name", "telephone1")
 ```
+
+### Flat Objects (`-AsObject`)
+
+A Dataverse row is not a record with fixed fields: it is a sparse bag of typed values, and the
+values are SDK objects. That is faithful to the service and unusable with `Format-Table`,
+`Export-Csv` or `$row.column`. `-AsObject` flattens it.
+
+```powershell
+# Lookup -> its Guid, choice -> its number, money -> its decimal, aliased value -> the value inside
+Find-PSDataverseRecord -LogicalName account -Filter @{ statecode = 0 } -AsObject | Format-Table
+
+# ...with the display text beside each value: {column}_name for a lookup, {column}_display for a label
+Get-PSDataverseRecord -LogicalName account -Id $id -AsObject -IncludeFormattedValues
+
+# For records you already have - batch results, entities in a variable
+$result.Items | ConvertTo-PSDataverseObject | Export-Csv accounts.csv -NoTypeInformation
+```
+
+Writing one back uses the hashtable forms the module accepts on input - the write-side
+counterparts of what the flattener unwrapped:
+
+```powershell
+Set-PSDataverseRecord -LogicalName account -Id $id -Attributes @{
+    name           = 'Acme'
+    primarycontactid = @{ LogicalName = 'contact'; Id = $contactId }   # lookup by id
+    parentaccountid  = @{ LogicalName = 'account'; Key = @{ accountnumber = 'A-1' } }  # by alternate key
+    statuscode     = @{ OptionSet = 1 }                                # choice
+    industrycode   = @{ OptionSet = @(1, 2) }                          # multi-select choice
+    revenue        = @{ Money = 12500.00 }                             # currency
+}
+```
+
+A bare number would not do for a choice or an amount: the SDK needs `OptionSetValue` and `Money`,
+and there is no PowerShell literal for either. `$null` inside the hashtable clears the column.
+
+Whole numbers are narrowed on the way in - `ConvertFrom-Json` and PowerShell integer literals both
+produce `Int64`, while a whole-number column is `Int32` - and a nested object or a list is refused
+with the column named, rather than failing later inside the SDK.
 
 ---
 

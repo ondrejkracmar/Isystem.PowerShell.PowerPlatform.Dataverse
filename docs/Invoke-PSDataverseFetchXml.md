@@ -4,7 +4,7 @@ external help file: Isystem.PowerShell.PowerPlatform.Dataverse.dll-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/24/2026
+ms.date: 09/29/2026
 PlatyPS schema version: 2024-05-01
 title: Invoke-PSDataverseFetchXml
 ---
@@ -20,7 +20,7 @@ Queries Dataverse records using FetchXML.
 ### __AllParameterSets
 
 ```
-Invoke-PSDataverseFetchXml [-FetchXml] <string> [-All]
+Invoke-PSDataverseFetchXml [-FetchXml] <string> [-All] [-AsObject] [-IncludeFormattedValues]
 ```
 
 ## ALIASES
@@ -85,6 +85,27 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
+### -AsObject
+
+Return each row as a flat PowerShell object instead of the SDK Entity; aggregate and joined columns read like ordinary ones.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
 ### -FetchXml
 
 The FetchXML query string.
@@ -100,6 +121,28 @@ ParameterSets:
   Position: 0
   IsRequired: true
   ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -IncludeFormattedValues
+
+Add the display text beside each value.
+Requires -AsObject.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
 DontShow: false

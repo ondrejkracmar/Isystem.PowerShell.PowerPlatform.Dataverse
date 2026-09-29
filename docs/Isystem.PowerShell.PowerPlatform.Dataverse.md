@@ -5,7 +5,7 @@ HelpInfoUri:
 Locale: en-US
 Module Guid: 4f78bc29-fd8d-444c-a449-a244eeb23a79
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/24/2026
+ms.date: 09/29/2026
 PlatyPS schema version: 2024-05-01
 title: Isystem.PowerShell.PowerPlatform.Dataverse Module
 ---
@@ -21,6 +21,10 @@ Session-based cmdlets for Microsoft Dataverse (Power Platform, Dynamics 365): CR
 ### [Connect-PSDataverse](Connect-PSDataverse.md)
 
 Connects to a Microsoft Dataverse environment.
+
+### [ConvertTo-PSDataverseObject](ConvertTo-PSDataverseObject.md)
+
+Converts Dataverse records into flat PowerShell objects.
 
 ### [Disconnect-PSDataverse](Disconnect-PSDataverse.md)
 

@@ -4,7 +4,7 @@ external help file: Isystem.PowerShell.PowerPlatform.Dataverse.dll-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/24/2026
+ms.date: 09/29/2026
 PlatyPS schema version: 2024-05-01
 title: Get-PSDataverseRecord
 ---
@@ -20,19 +20,22 @@ Gets a Dataverse record by ID or alternate key.
 ### ByProperties (Default)
 
 ```
-Get-PSDataverseRecord [-LogicalName] <string> [-Id] <guid> [-Columns <string[]>]
+Get-PSDataverseRecord [-LogicalName] <string> [-Id] <guid> [-Columns <string[]>] [-AsObject]
+ [-IncludeFormattedValues]
 ```
 
 ### ByKey
 
 ```
-Get-PSDataverseRecord [-LogicalName] <string> -Key <hashtable> [-Columns <string[]>]
+Get-PSDataverseRecord [-LogicalName] <string> -Key <hashtable> [-Columns <string[]>] [-AsObject]
+ [-IncludeFormattedValues]
 ```
 
 ### ByInputObject
 
 ```
-Get-PSDataverseRecord -InputObject <Entity> [-Columns <string[]>]
+Get-PSDataverseRecord -InputObject <Entity> [-Columns <string[]>] [-AsObject]
+ [-IncludeFormattedValues]
 ```
 
 ## ALIASES
@@ -75,6 +78,28 @@ The raw Guid output binds to -Id via pipeline by value (ByProperties set).
 
 ## PARAMETERS
 
+### -AsObject
+
+Return the row as a flat PowerShell object - lookups as their id, choices as their number, amounts as their decimal - instead of the SDK Entity.
+What Format-Table, Export-Csv and $row.column expect.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
 ### -Columns
 
 An array of column logical names to retrieve.
@@ -114,6 +139,28 @@ ParameterSets:
   IsRequired: true
   ValueFromPipeline: true
   ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -IncludeFormattedValues
+
+Add the display text beside each value: {column}_name for a lookup, {column}_display for the label the service formatted for a choice, date or amount.
+Requires -AsObject.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []

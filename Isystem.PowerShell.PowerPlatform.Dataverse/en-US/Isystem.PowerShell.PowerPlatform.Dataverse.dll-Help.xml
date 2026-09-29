@@ -391,9 +391,9 @@ Connect-PSDataverse -Url "https://org.crm.dynamics.com" -ClientId "app-id" -Clie
       <maml:para>The Get-PSDataverseRecord cmdlet retrieves a single record from a Dataverse table by its logical name and unique identifier. You can optionally specify which columns to retrieve.</maml:para>
     </maml:description>
     <command:syntax>
-      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>Id</maml:name><command:parameterValue required="true">Guid</command:parameterValue><dev:type><maml:name>Guid</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter></command:syntaxItem>
-      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>Key</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter></command:syntaxItem>
-      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="named" pipelineInput="True (ByValue)" globbing="false"><maml:name>InputObject</maml:name><command:parameterValue required="true">Entity</command:parameterValue><dev:type><maml:name>Entity</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>Id</maml:name><command:parameterValue required="true">Guid</command:parameterValue><dev:type><maml:name>Guid</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>AsObject</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeFormattedValues</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="named" pipelineInput="false" globbing="false"><maml:name>Key</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>AsObject</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeFormattedValues</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Get-PSDataverseRecord</maml:name><command:parameter required="true" position="named" pipelineInput="True (ByValue)" globbing="false"><maml:name>InputObject</maml:name><command:parameterValue required="true">Entity</command:parameterValue><dev:type><maml:name>Entity</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>AsObject</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeFormattedValues</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" position="0" pipelineInput="true (ByPropertyName)" globbing="false">
@@ -445,6 +445,28 @@ Connect-PSDataverse -Url "https://org.crm.dynamics.com" -ClientId "app-id" -Clie
         <dev:type>
           <maml:name>Hashtable</maml:name>
         </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>AsObject</maml:name>
+        <maml:description>
+          <maml:para>Return the row as a flat PowerShell object - lookups as their id, choices as their number, amounts as their decimal - instead of the SDK Entity. What Format-Table, Export-Csv and $row.column expect.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>IncludeFormattedValues</maml:name>
+        <maml:description>
+          <maml:para>Add the display text beside each value: {column}_name for a lookup, {column}_display for the label the service formatted for a choice, date or amount. Requires -AsObject.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:returnValues>
@@ -577,7 +599,7 @@ Connect-PSDataverse -Url "https://org.crm.dynamics.com" -ClientId "app-id" -Clie
       <maml:para>The Find-PSDataverseRecord cmdlet queries a Dataverse table using optional equality filters, LIKE filters, column selection, ordering, and paging. Use -All to retrieve all pages of results, or -Top to limit the number of records returned.</maml:para>
     </maml:description>
     <command:syntax>
-      <command:syntaxItem><maml:name>Find-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Filter</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>LikeFilter</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>OrderBy</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Descending</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Top</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>All</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Find-PSDataverseRecord</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Filter</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>LikeFilter</maml:name><command:parameterValue required="true">Hashtable</command:parameterValue><dev:type><maml:name>Hashtable</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Columns</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>OrderBy</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Descending</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Top</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>All</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>AsObject</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeFormattedValues</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
@@ -656,6 +678,28 @@ Connect-PSDataverse -Url "https://org.crm.dynamics.com" -ClientId "app-id" -Clie
         <maml:name>All</maml:name>
         <maml:description>
           <maml:para>Retrieves all matching records across all pages. Overrides -Top.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>AsObject</maml:name>
+        <maml:description>
+          <maml:para>Return each row as a flat PowerShell object - lookups as their id, choices as their number, amounts as their decimal - instead of the SDK Entity.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>IncludeFormattedValues</maml:name>
+        <maml:description>
+          <maml:para>Add the display text beside each value: {column}_name for a lookup, {column}_display for a formatted label. Requires -AsObject.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1353,7 +1397,7 @@ Invoke-PSDataverseTransaction -Operations $ops</dev:code>
       <maml:para>The Invoke-PSDataverseFetchXml cmdlet executes a FetchXML query against Dataverse and returns the matching Entity objects. The FetchXML is validated for well-formedness before execution. Use -All to automatically page through all results.</maml:para>
     </maml:description>
     <command:syntax>
-      <command:syntaxItem><maml:name>Invoke-PSDataverseFetchXml</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue)" globbing="false"><maml:name>FetchXml</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>All</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Invoke-PSDataverseFetchXml</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue)" globbing="false"><maml:name>FetchXml</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>All</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>AsObject</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeFormattedValues</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" position="0" pipelineInput="true (ByValue)" globbing="false">
@@ -1370,6 +1414,28 @@ Invoke-PSDataverseTransaction -Operations $ops</dev:code>
         <maml:name>All</maml:name>
         <maml:description>
           <maml:para>Retrieves all matching records across all pages using paging cookies.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>AsObject</maml:name>
+        <maml:description>
+          <maml:para>Return each row as a flat PowerShell object instead of the SDK Entity; aggregate and joined columns read like ordinary ones.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>IncludeFormattedValues</maml:name>
+        <maml:description>
+          <maml:para>Add the display text beside each value. Requires -AsObject.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1423,6 +1489,86 @@ Invoke-PSDataverseFetchXml -FetchXml $fetchXml</dev:code>
   <!-- ==================== Get-PSDataverseTokenCache ==================== -->
   <command:command>
     <command:details>
+      <command:name>ConvertTo-PSDataverseObject</command:name>
+      <command:verb>ConvertTo</command:verb>
+      <command:noun>PSDataverseObject</command:noun>
+      <maml:description>
+        <maml:para>Converts Dataverse records into flat PowerShell objects.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The ConvertTo-PSDataverseObject cmdlet applies the same conversion the query cmdlets perform with -AsObject, to records you already have: the items of an Invoke-PSDataverseBatch result, entities kept in a variable, anything that came back as an SDK Entity.</maml:para>
+      <maml:para>A Dataverse row is a sparse bag of typed values rather than a record with fixed fields, and the values are SDK objects. This flattens them: a lookup becomes its id, an option set its number, money its decimal, a multi-select an array of numbers, and an aliased value (a FetchXML join or aggregate) reads like an ordinary column. LogicalName and Id come first so a table of mixed rows still lines up.</maml:para>
+      <maml:para>No connection is needed - the cmdlet touches nothing but the objects piped into it. Anything that is not an Entity passes through untouched, so it stays usable mid-pipeline.</maml:para>
+      <maml:para>To write a flattened row back, use the hashtable forms the module accepts on input: @{ LogicalName = 'account'; Id = $guid } for a lookup, @{ OptionSet = 1 } for a choice, @{ Money = 12.50 } for an amount.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>ConvertTo-PSDataverseObject</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue)" globbing="false"><maml:name>InputObject</maml:name><command:parameterValue required="true">PSObject[]</command:parameterValue><dev:type><maml:name>PSObject[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeFormattedValues</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="True (ByValue)" globbing="false">
+        <maml:name>InputObject</maml:name>
+        <maml:description>
+          <maml:para>The records to convert. Anything that is not an SDK Entity is passed through untouched.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">PSObject[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.PSObject[]</maml:name>
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" globbing="false">
+        <maml:name>IncludeFormattedValues</maml:name>
+        <maml:description>
+          <maml:para>Add the display text beside each value: {column}_name for a lookup, {column}_display for the label the service formatted for a choice, date or amount.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.Management.Automation.PSObject</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>Records, typically Microsoft.Xrm.Sdk.Entity instances.</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.PSObject</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>One flat object per record, typed Dataverse.Record and Dataverse.Record.&lt;table&gt;.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Export records kept in a variable ---</maml:title>
+        <dev:code>$rows | ConvertTo-PSDataverseObject | Export-Csv accounts.csv -NoTypeInformation</dev:code>
+        <dev:remarks>
+          <maml:para>Export-Csv cannot serialize an SDK Entity; the flattened rows export as ordinary columns.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Read the rows a batch returned, with display text ---</maml:title>
+        <dev:code>$result = Invoke-PSDataverseBatch -Operations $operations
+$result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Table</dev:code>
+        <dev:remarks>
+          <maml:para>Items that are not records pass through, so nothing is lost from the result.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <command:command>
+    <command:details>
       <command:name>Get-PSDataverseTokenCache</command:name>
       <command:verb>Get</command:verb>
       <command:noun>PSDataverseTokenCache</command:noun>
@@ -1473,8 +1619,27 @@ Invoke-PSDataverseFetchXml -FetchXml $fetchXml</dev:code>
       <command:syntaxItem><maml:name>Get-PSDataverseTable</maml:name><command:parameter required="false" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeSystem</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>IncludeSystem</maml:name><maml:description><maml:para>Include the tables that ship with the platform (~1,300 of them). Without it only custom tables - the ones with a publisher prefix - are listed.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="false" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><maml:description><maml:para>Logical name of the table; wildcards are allowed (it3c_*). Omitted, every table is returned - custom ones only, unless -IncludeSystem is given. An exact name costs one metadata request; a wildcard reads the whole catalogue, because the metadata service has no server-side name filter.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>IncludeSystem</maml:name>
+        <maml:description>
+          <maml:para>Include the tables that ship with the platform (~1,300 of them). Without it only custom tables - the ones with a publisher prefix - are listed.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table; wildcards are allowed (it3c_*). Omitted, every table is returned - custom ones only, unless -IncludeSystem is given. An exact name costs one metadata request; a wildcard reads the whole catalogue, because the metadata service has no server-side name filter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -1543,10 +1708,48 @@ Invoke-PSDataverseFetchXml -FetchXml $fetchXml</dev:code>
       <command:syntaxItem><maml:name>Get-PSDataverseColumn</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="1" pipelineInput="false" globbing="false"><maml:name>Name</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Writable</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>CustomOnly</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>CustomOnly</maml:name><maml:description><maml:para>Only custom columns - the ones carrying a publisher prefix.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><maml:description><maml:para>Logical name of the table. Exact, not a search: use Get-PSDataverseTable to find it, or pipe that cmdlet's output in.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="1" pipelineInput="false" globbing="false"><maml:name>Name</maml:name><maml:description><maml:para>Column name filter; wildcards are allowed (it3c_*). Omitted, every column of the table is returned.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Writable</maml:name><maml:description><maml:para>Only columns that can be written on create or update. Calculated, rollup and system columns read perfectly well and are rejected on write, which is what this filters out.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>CustomOnly</maml:name>
+        <maml:description>
+          <maml:para>Only custom columns - the ones carrying a publisher prefix.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table. Exact, not a search: use Get-PSDataverseTable to find it, or pipe that cmdlet's output in.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="1" pipelineInput="false" globbing="false">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Column name filter; wildcards are allowed (it3c_*). Omitted, every column of the table is returned.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Writable</maml:name>
+        <maml:description>
+          <maml:para>Only columns that can be written on create or update. Calculated, rollup and system columns read perfectly well and are rejected on write, which is what this filters out.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -1608,7 +1811,16 @@ Invoke-PSDataverseFetchXml -FetchXml $fetchXml</dev:code>
       <command:syntaxItem><maml:name>Get-PSDataverseKey</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><maml:description><maml:para>Logical name of the table. Exact; pipe Get-PSDataverseTable in to walk several.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
+      <command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table. Exact; pipe Get-PSDataverseTable in to walk several.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>

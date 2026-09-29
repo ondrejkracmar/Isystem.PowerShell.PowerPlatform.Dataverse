@@ -4,7 +4,7 @@ external help file: Isystem.PowerShell.PowerPlatform.Dataverse.dll-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/24/2026
+ms.date: 09/29/2026
 PlatyPS schema version: 2024-05-01
 title: Find-PSDataverseRecord
 ---
@@ -21,7 +21,8 @@ Searches for Dataverse records matching filter criteria.
 
 ```
 Find-PSDataverseRecord [-LogicalName] <string> [-Filter <hashtable>] [-LikeFilter <hashtable>]
- [-Columns <string[]>] [-OrderBy <string>] [-Descending] [-Top <int>] [-All]
+ [-Columns <string[]>] [-OrderBy <string>] [-Descending] [-Top <int>] [-All] [-AsObject]
+ [-IncludeFormattedValues]
 ```
 
 ## ALIASES
@@ -60,6 +61,27 @@ Retrieves all account records sorted by creation date in descending order.
 
 Retrieves all matching records across all pages.
 Overrides -Top.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -AsObject
+
+Return each row as a flat PowerShell object - lookups as their id, choices as their number, amounts as their decimal - instead of the SDK Entity.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -129,6 +151,28 @@ Null values produce an "is null" condition.
 ```yaml
 Type: System.Collections.Hashtable
 DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -IncludeFormattedValues
+
+Add the display text beside each value: {column}_name for a lookup, {column}_display for a formatted label.
+Requires -AsObject.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
