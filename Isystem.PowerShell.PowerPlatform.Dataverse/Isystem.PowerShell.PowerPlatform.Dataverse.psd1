@@ -12,7 +12,7 @@
 RootModule = 'Isystem.PowerShell.PowerPlatform.Dataverse.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.2.0'
+ModuleVersion = '1.2.1'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core'
@@ -115,57 +115,26 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '## [1.2.0] - 2026-09-29
+        ReleaseNotes = '## [1.2.1] - 2026-09-29
+
+Documentation only - the module binaries are byte-for-byte those of 1.2.0. The release
+exists because SECURITY.md ships to the GitHub mirror, so leaving it untagged would have
+left the mirror describing a signing arrangement the repository had already corrected.
 
 ### Fixed
 
-- **A connection opened inside a function is no longer lost when that function returns.** The
-  session was written to the CALLER''s scope and marked `Private`, so `Connect-PSDataverse` wrapped
-  in a function - the normal way automation is written - left its connection behind the moment the
-  function returned, and every later cmdlet got a fresh, disconnected session. Anything built on
-  the module this way silently wrote nothing. The session now lives in the runspace''s global
-  scope and is visible from every nested scope, and two regression tests call a cmdlet from
-  inside a function so the suite would notice if it came back.
-
-### Added
-
-- **`ConvertTo-PSDataverseObject`** and **`-AsObject` / `-IncludeFormattedValues`** on
-  `Get-PSDataverseRecord`, `Find-PSDataverseRecord` and `Invoke-PSDataverseFetchXml`. A Dataverse
-  row is a sparse bag of typed SDK objects, which is faithful to the service and unusable with
-  `Format-Table`, `Export-Csv` or `$row.column`; these flatten it - lookup to its id, choice to its
-  number, money to its decimal, aliased value to the value inside it.
-- **Write-side counterparts for the flattened types**, so a row can be read, edited and written
-  back: `@{ OptionSet = 1 }`, `@{ OptionSet = @(1, 2) }` and `@{ Money = 12.50 }` alongside the
-  existing lookup forms. Choice and currency columns previously could not be written at all - the
-  reader unwrapped them and nothing wrapped them again.
-- **Whole numbers are narrowed to what a Dataverse column takes.** `ConvertFrom-Json`, and a
-  PowerShell integer literal, produce `Int64`; a whole-number column is `Int32`, and the SDK
-  rejected the wider type on serialization. A value that genuinely does not fit now says so and
-  names the column.
-- **A nested object or a list is refused with the column named**, instead of failing later inside
-  the SDK with a message that mentions neither.
+- `GitVersion.yml` covers `release/*`. The comment above the branch regexes says they must
+  between them match every branch name that can open a pull request, because an unmatched
+  branch makes GitVersion emit `Infinity` and the pipeline''s `ConvertFrom-Json` rejects it.
+  The obvious name for a release branch was the one they missed; earlier releases used
+  `chore/release-x.y.z`, which matches the hotfix regex, so the gap stayed hidden.
 
 ### Changed
 
-- **The three filters behave the same way.** `Find-PSDataverseRecord -Filter` converted its values
-  one way, `-LikeFilter` another and `Get-PSDataverseRecordCount -Filter` a third; a condition now
-  always compares against the stored scalar, which is the shape a flattened row hands back.
-- The retained delegated token cache is zeroed on dispose. `Close` keeps it on purpose so a script
-  can export it after `Disconnect-PSDataverse`; disposal is where that retention has to end,
-  because the blob holds a refresh token in clear.
-- Seven user-facing messages moved from string literals into `Strings.resx`, as `CONTRIBUTING.md`
-  requires - including the two seen most often, "Not connected to Dataverse" and
-  "Failed to connect to Dataverse".
-- `DataverseLoginMode.Auto` documents itself as an alias for `Interactive` rather than repeating
-  that mode''s description word for word.
-- Both token providers state that the session is bound to the URL given at connect time, instead
-  of silently ignoring the `instanceUri` the callback passes.
-
-### Removed
-
-- `build/vsts-syncRepository.ps1`: nothing called it, and it could not have run on the Linux
-  agent (`System.Web.HttpUtility` without `Add-Type`, PSFramework without an import).
-- `Strings.TransactionResultVerbose`: unused, and a duplicate of `TransactionCommittedVerbose`.
+- `SECURITY.md` says which key the published packages are actually signed with: the
+  checked-in development key, as with every other Isystem module, until signing that
+  carries trust moves to a central Azure service. The `-KeyFile` hook stays for that day.
+  Nobody should read a strong name here as evidence of origin.
 '
 
         # Prerelease string of this module

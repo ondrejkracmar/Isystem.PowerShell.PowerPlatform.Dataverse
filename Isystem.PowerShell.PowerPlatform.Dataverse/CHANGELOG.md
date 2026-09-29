@@ -7,6 +7,27 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
+## [1.2.1] - 2026-09-29
+
+Documentation only - the module binaries are byte-for-byte those of 1.2.0. The release
+exists because SECURITY.md ships to the GitHub mirror, so leaving it untagged would have
+left the mirror describing a signing arrangement the repository had already corrected.
+
+### Fixed
+
+- `GitVersion.yml` covers `release/*`. The comment above the branch regexes says they must
+  between them match every branch name that can open a pull request, because an unmatched
+  branch makes GitVersion emit `Infinity` and the pipeline's `ConvertFrom-Json` rejects it.
+  The obvious name for a release branch was the one they missed; earlier releases used
+  `chore/release-x.y.z`, which matches the hotfix regex, so the gap stayed hidden.
+
+### Changed
+
+- `SECURITY.md` says which key the published packages are actually signed with: the
+  checked-in development key, as with every other Isystem module, until signing that
+  carries trust moves to a central Azure service. The `-KeyFile` hook stays for that day.
+  Nobody should read a strong name here as evidence of origin.
+
 ## [1.2.0] - 2026-09-29
 
 ### Fixed

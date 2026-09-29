@@ -33,9 +33,16 @@ Consequences, stated plainly:
   assembly with the same identity.
 - For distribution trust the release pipeline supports **Authenticode signing** of every shipped
   file (`.psd1`, `.psm1`, `.ps1xml`, `.dll`) from a certificate held in the `CodeSigning`
-  variable group; the code-signing private key never lives in the repository. A production
-  strong-name key can likewise be injected at build time with
-  `/p:AssemblyOriginatorKeyFile=<secure file>` (see `Directory.Build.props`).
+  variable group; the code-signing private key never lives in the repository.
+
+**Which key the published packages are actually signed with.** The checked-in development key,
+deliberately, and the same one every other Isystem module uses. `vsts-build-library.ps1` takes a
+`-KeyFile` and `Directory.Build.props` honours `/p:AssemblyOriginatorKeyFile`, but the pipeline
+does not pass one, so the hook is a placeholder rather than something in use. That is a conscious
+choice, not an oversight: strong naming is identity, not a trust boundary, and signing that does
+carry trust is being moved to a central Azure signing service for all modules at once. Until that
+lands, do not read a strong name here as evidence of origin - the Authenticode signature is what
+carries that, and only when `CodeSigningCertBase64` is populated.
 
 ## Dependencies
 
