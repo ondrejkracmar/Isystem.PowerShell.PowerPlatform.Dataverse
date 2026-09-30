@@ -4,7 +4,7 @@ external help file: Isystem.PowerShell.PowerPlatform.Dataverse.dll-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/29/2026
+ms.date: 09/30/2026
 PlatyPS schema version: 2024-05-01
 title: Get-PSDataverseTable
 ---
@@ -33,7 +33,8 @@ This cmdlet has the following aliases,
 Every other cmdlet takes the LOGICAL name of a table, which is neither the display name the maker portal shows nor the plural collection name.
 This cmdlet finds it, and tells the two causes of the SDK error "the entity with a name = X was not found in the MetadataCache" apart: the table is not in this environment, or the name is spelled differently.
 An exact name costs one metadata request; a wildcard has to read the whole catalogue, because the metadata service has no server-side name filter.
-Only custom tables are listed unless -IncludeSystem is given.
+Without -IncludeSystem the filter is IsCustomEntity, which means "did not come with the base platform" rather than "you made it" - every table installed by any solution passes, Microsoft's first-party ones included, so on a tenant with apps installed hundreds of tables nobody here created still come back.
+To find yours, filter by your publisher prefix: -LogicalName 'it3c_*'.
 
 ## EXAMPLES
 

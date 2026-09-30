@@ -6,23 +6,24 @@ Locale: en-US
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
 ms.date: 09/30/2026
 PlatyPS schema version: 2024-05-01
-title: Find-PSDataverseRecord
+title: New-PSDataverseTable
 ---
 
-# Find-PSDataverseRecord
+# New-PSDataverseTable
 
 ## SYNOPSIS
 
-Searches for Dataverse records matching filter criteria.
+Creates a custom Dataverse table.
 
 ## SYNTAX
 
 ### __AllParameterSets
 
 ```
-Find-PSDataverseRecord [-LogicalName] <string> [-Filter <hashtable>] [-LikeFilter <hashtable>]
- [-Columns <string[]>] [-OrderBy <string>] [-Descending] [-Top <int>] [-All] [-AsObject]
- [-IncludeFormattedValues]
+New-PSDataverseTable [-SchemaName] <string> [[-DisplayName] <string>]
+ [-DisplayCollectionName <string>] [-Description <string>] [-PrimaryNameColumn <string>]
+ [-PrimaryNameDisplayName <string>] [-PrimaryNameMaxLength <int>] [-PassThru]
+ [-SolutionUniqueName <string>] [-WhatIf] [-Confirm]
 ```
 
 ## ALIASES
@@ -32,41 +33,42 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-The Find-PSDataverseRecord cmdlet queries a Dataverse table using optional equality filters, LIKE filters, column selection, ordering, and paging.
-Use -All to retrieve all pages of results, or -Top to limit the number of records returned.
+The New-PSDataverseTable cmdlet creates a custom table.
+Dataverse creates a table and its primary NAME column in one operation, so both are described here; the primary id column is named by the platform and is not yours to choose.
+
+The schema name carries the publisher customization prefix (it3c_person).
+Everything else in this module addresses tables by the LOGICAL name, which is the schema name lower-cased.
+
+The primary name column defaults to the table prefix plus name, so it3c_person gets it3c_name.
+
+Without -SolutionUniqueName the component lands in the Default solution, where it works but cannot be exported cleanly - which is discovered much later, when someone tries to move the tables to another environment and finds there is nothing to move.
 
 ## EXAMPLES
 
-### Find records with equality filter
+### Create a mirrored table
 
-Find-PSDataverseRecord -LogicalName "account" -Filter @{ statecode = 0 }
+New-PSDataverseTable -SchemaName it3c_person -DisplayName Person -SolutionUniqueName it3cM365Mirror
 
-Returns up to 50 active account records.
+Creates it3c_person with the primary name column it3c_name, inside the named solution.
 
-### Find records with LIKE filter
+### Name the primary column explicitly
 
-Find-PSDataverseRecord -LogicalName "contact" -LikeFilter @{ fullname = "%Smith%" } -Columns "fullname", "emailaddress1"
+New-PSDataverseTable it3c_space Space -PrimaryNameColumn it3c_displayname -PassThru
 
-Finds contacts whose full name contains "Smith", returning only name and email.
-
-### Get all records with sorting
-
-Find-PSDataverseRecord -LogicalName "account" -All -OrderBy "createdon" -Descending
-
-Retrieves all account records sorted by creation date in descending order.
+Useful when the name column should not follow the prefix convention.
 
 ## PARAMETERS
 
-### -All
+### -Confirm
 
-Retrieves all matching records across all pages.
-Overrides -Top.
+Prompts for confirmation before creating the record.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-DefaultValue: False
+DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- cf
 ParameterSets:
 - Name: (All)
   Position: Named
@@ -79,34 +81,12 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -AsObject
+### -Description
 
-Return each row as a flat PowerShell object - lookups as their id, choices as their number, amounts as their decimal - instead of the SDK Entity.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -Columns
-
-An array of column logical names to retrieve.
-If omitted, all columns are returned.
+Description shown in the maker portal.
 
 ```yaml
-Type: System.String[]
+Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
@@ -122,9 +102,53 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Descending
+### -DisplayCollectionName
 
-When specified with -OrderBy, sorts results in descending order.
+Plural display name.
+Defaults to the display name with an s.
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -DisplayName
+
+Display name shown in the maker portal.
+Defaults to the schema name.
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -PassThru
+
+Return the created table metadata instead of nothing.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -143,13 +167,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Filter
+### -PrimaryNameColumn
 
-A hashtable of attribute-value pairs for equality filtering.
-Null values produce an "is null" condition.
+Schema name of the primary name column.
+Defaults to the table prefix plus name, so it3c_person gets it3c_name.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
@@ -165,35 +189,13 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -IncludeFormattedValues
+### -PrimaryNameDisplayName
 
-Add the display text beside each value: {column}_name for a lookup, {column}_display for a formatted label.
-Requires -AsObject.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-DefaultValue: False
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
-  ValueFromRemainingArguments: false
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -LikeFilter
-
-A hashtable of attribute-value pairs for LIKE (wildcard) filtering.
-Use % as the wildcard character.
+Display name of the primary name column.
+Defaults to Name.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.String
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []
@@ -209,9 +211,32 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -LogicalName
+### -PrimaryNameMaxLength
 
-The logical name of the Dataverse table to query.
+Length of the primary name column.
+Defaults to 200.
+
+```yaml
+Type: System.Int32
+DefaultValue: ''
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -SchemaName
+
+Schema name including the publisher customization prefix, for example it3c_person.
+The logical name every other cmdlet takes is this name lower-cased.
 
 ```yaml
 Type: System.String
@@ -223,16 +248,17 @@ ParameterSets:
   Position: 0
   IsRequired: true
   ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: true
+  ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -OrderBy
+### -SolutionUniqueName
 
-The logical name of the column to sort results by.
+Unique name of the solution to add the table to, not its display name.
+Omitted, the table lands in the Default solution and cannot be exported cleanly.
 
 ```yaml
 Type: System.String
@@ -251,18 +277,16 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
-### -Top
+### -WhatIf
 
-Maximum number of records to return.
-Valid range: 1-5000.
-Default: 50.
-Ignored when -All is specified.
+Shows what would happen if the cmdlet runs without actually creating the record.
 
 ```yaml
-Type: System.Int32
-DefaultValue: 50
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: ''
 SupportsWildcards: false
-Aliases: []
+Aliases:
+- wi
 ParameterSets:
 - Name: (All)
   Position: Named
@@ -284,15 +308,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### System.String
-
-{{ Fill in the Description }}
-
 ## OUTPUTS
 
-### Microsoft.Xrm.Sdk.Entity
+### Isystem.PowerShell.PowerPlatform.Dataverse.Models.DataverseTableInfo
 
-Zero or more Entity objects matching the query criteria.
+With -PassThru, the metadata of the created table.
 
 ## NOTES
 

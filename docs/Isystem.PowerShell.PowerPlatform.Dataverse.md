@@ -5,7 +5,7 @@ HelpInfoUri:
 Locale: en-US
 Module Guid: 4f78bc29-fd8d-444c-a449-a244eeb23a79
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/29/2026
+ms.date: 09/30/2026
 PlatyPS schema version: 2024-05-01
 title: Isystem.PowerShell.PowerPlatform.Dataverse Module
 ---
@@ -74,9 +74,25 @@ Queries Dataverse records using FetchXML.
 
 Executes Dataverse operations in a single atomic transaction.
 
+### [New-PSDataverseColumn](New-PSDataverseColumn.md)
+
+Adds a column to a Dataverse table.
+
+### [New-PSDataverseKey](New-PSDataverseKey.md)
+
+Creates an alternate key on a Dataverse table.
+
+### [New-PSDataverseLookup](New-PSDataverseLookup.md)
+
+Creates a lookup column and the relationship behind it.
+
 ### [New-PSDataverseRecord](New-PSDataverseRecord.md)
 
 Creates a new record in a Dataverse table.
+
+### [New-PSDataverseTable](New-PSDataverseTable.md)
+
+Creates a custom Dataverse table.
 
 ### [Remove-PSDataverseRecord](Remove-PSDataverseRecord.md)
 

@@ -109,7 +109,7 @@ The same package is published to the i-system Azure Artifacts feed for internal 
 ```powershell
 Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 
-# Should list all 18 cmdlets:
+# Should list all 22 cmdlets:
 #   Connect-PSDataverse          Disconnect-PSDataverse
 #   Get-PSDataverseConnection    Get-PSDataverseTokenCache
 #   Get-PSDataverseRecord        Get-PSDataverseRecordCount
@@ -119,6 +119,8 @@ Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 #   Invoke-PSDataverseTransaction Invoke-PSDataverseFetchXml
 #   Get-PSDataverseTable         Get-PSDataverseColumn
 #   Get-PSDataverseKey           ConvertTo-PSDataverseObject
+#   New-PSDataverseTable         New-PSDataverseColumn
+#   New-PSDataverseKey           New-PSDataverseLookup
 ```
 
 ---

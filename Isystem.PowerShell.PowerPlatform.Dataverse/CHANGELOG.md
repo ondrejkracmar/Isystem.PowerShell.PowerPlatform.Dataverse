@@ -7,6 +7,40 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-09-30
+
+### Added
+
+- **`New-PSDataverseTable`, `New-PSDataverseColumn`, `New-PSDataverseKey` and
+  `New-PSDataverseLookup`.** The module could read metadata and not write it, so every table a
+  script wanted to fill had to be built by hand in the maker portal first - for a mirrored model
+  that is a table, an alternate key, a soft-delete flag and a column per property, times eight
+  entities, with every typo surfacing later as a rejected row.
+- **`-Wait` on `New-PSDataverseKey`.** An alternate key's unique index is built asynchronously, so
+  the request returning does not mean the key works; until the index reports Active an upsert
+  through it fails with a message that never mentions the index. `-Wait` polls until it is Active,
+  backing off as it goes, and says so plainly when the index fails - a duplicate in the existing
+  rows being the usual reason.
+- **`-SolutionUniqueName` on all four.** Without it Dataverse puts the new component in the
+  Default solution, where it works but cannot be exported cleanly - discovered much later, when
+  someone tries to move the tables to another environment and finds there is nothing to move.
+- `New-PSDataverseLookup` names the relationship explicitly. A lookup is a one-to-many
+  relationship and the column appears as a side effect; the relationship's schema name is what the
+  Web API navigation property and `@odata.bind` are built from, which is the detail that trips
+  people up when they hand-write OData.
+
+### Fixed
+
+- **The help for `Get-PSDataverseTable -IncludeSystem` said something untrue.** It claimed that
+  without the switch "only custom tables are listed", but the filter is `IsCustomEntity`, which
+  means "did not come with the base platform" rather than "you made it". Every table installed by
+  any solution passes - Microsoft's first-party ones included (`msdyn_`, `mspp_`, `adx_`) - so on
+  a tenant with apps installed hundreds of unrelated tables come back. The help now says so and
+  points at filtering by publisher prefix.
+- `New-PSDataverseColumn` takes `-MaxLength` and `-Precision` as plain integers rather than
+  nullables, which surfaced in help as `Nullable\`1`. Whether one was supplied is read from
+  `BoundParameters`, so a legitimate `-Precision 0` stays distinguishable from not passing it.
+
 ## [1.2.1] - 2026-09-29
 
 Documentation only - the module binaries are byte-for-byte those of 1.2.0. The release
