@@ -7,6 +7,18 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-10-01
+
+### Fixed
+
+- A `$batch` that succeeded was reported as failing for every operation. Response parts were
+  matched back to requests by `Content-ID`, which is only meaningful inside a changeset: requests
+  sent independently - what `-ContinueOnError` asks for - come back without one, so no part matched
+  any request and a wholly successful batch of 900 upserts was reported as 900 failures. Parts are
+  now matched by position, which is the order the protocol guarantees, with `Content-ID` used to
+  correct the mapping only where the service sends one. Found on the first live run; the unit tests
+  had only ever exercised the changeset shape.
+
 ## [1.4.0] - 2026-10-01
 
 ### Added
