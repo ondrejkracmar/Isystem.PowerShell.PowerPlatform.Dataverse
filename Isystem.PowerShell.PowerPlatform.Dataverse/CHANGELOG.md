@@ -7,6 +7,28 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-10-01
+
+### Added
+
+- `Invoke-PSDataverseBatch -UseWebApi` sends the batch through the OData `$batch` endpoint instead
+  of `ExecuteMultipleRequest`. Dataverse for Teams does not support the ExecuteMultiple message at
+  all - it answers that the message is not supported for that offering - so until now a batch was
+  simply impossible there and callers had to fall back to one request per row. Service protection
+  allows roughly 6000 requests per five minutes, which makes a 330,000 row load four to five hours
+  one row at a time and minutes at 1000 rows per call.
+- Without the switch the cmdlet tries ExecuteMultiple first and moves to the Web API by itself when
+  the environment refuses the message, remembering it for the session. An environment does not grow
+  an ExecuteMultiple halfway through, so re-learning it on every batch would cost one wasted round
+  trip per batch.
+- `ContinueOnError` maps onto the protocol rather than being emulated: a changeset is atomic, so the
+  requests go inside one changeset when the caller wants all-or-nothing, and straight into the batch
+  when the caller wants the rest to proceed after a failure.
+- The Web API path returns the same `DataverseBatchResult` as ExecuteMultiple, down to the fault code
+  and the created/updated distinction on an upsert, so a caller cannot tell which transport ran. A
+  request whose part is missing from the response - a rolled-back changeset, a batch refused as a
+  whole - is reported as failed rather than counted as a success.
+
 ## [1.3.0] - 2026-09-30
 
 ### Added

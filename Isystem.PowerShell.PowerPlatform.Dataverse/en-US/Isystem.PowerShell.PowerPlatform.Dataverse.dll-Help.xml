@@ -1231,9 +1231,20 @@ $updated.name</dev:code>
       <maml:para>The Invoke-PSDataverseBatch cmdlet sends multiple create, update, upsert, and delete operations to Dataverse in a single ExecuteMultiple request. Each operation is a hashtable with Action (Create, Update, Upsert, Delete), LogicalName, and Id or Key (alternate key hashtable) plus Attributes; lookups are written as nested hashtables @{ LogicalName = ...; Id = ... } or @{ LogicalName = ...; Key = @{ ... } }. The cmdlet returns a typed DataverseBatchResult with success and failure counts and one Items entry per operation (Index, Action, LogicalName, Id, Succeeded, RecordCreated, ErrorCode, Message). The cmdlet supports ShouldProcess with medium confirm impact.</maml:para>
     </maml:description>
     <command:syntax>
-      <command:syntaxItem><maml:name>Invoke-PSDataverseBatch</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Operations</maml:name><command:parameterValue required="true">Hashtable[]</command:parameterValue><dev:type><maml:name>Hashtable[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ContinueOnError</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Invoke-PSDataverseBatch</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>Operations</maml:name><command:parameterValue required="true">Hashtable[]</command:parameterValue><dev:type><maml:name>Hashtable[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>ContinueOnError</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>UseWebApi</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>UseWebApi</maml:name>
+        <maml:description>
+          <maml:para>Send the batch through the OData $batch endpoint instead of ExecuteMultiple. Required on Dataverse for Teams, which does not support the ExecuteMultiple message at all; elsewhere it is optional and the two behave alike. Without this switch the cmdlet tries ExecuteMultiple first and switches by itself when the environment refuses the message, remembering it for the session.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
         <maml:name>Operations</maml:name>
         <maml:description>

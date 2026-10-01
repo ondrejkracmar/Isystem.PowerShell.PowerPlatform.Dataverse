@@ -4,7 +4,7 @@ external help file: Isystem.PowerShell.PowerPlatform.Dataverse.dll-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 09/30/2026
+ms.date: 10/01/2026
 PlatyPS schema version: 2024-05-01
 title: Invoke-PSDataverseBatch
 ---
@@ -20,7 +20,8 @@ Executes a batch of Dataverse operations (create/update/upsert/delete).
 ### __AllParameterSets
 
 ```
-Invoke-PSDataverseBatch [-Operations] <hashtable[]> [-ContinueOnError] [-WhatIf] [-Confirm]
+Invoke-PSDataverseBatch [-Operations] <hashtable[]> [-ContinueOnError] [-UseWebApi] [-WhatIf]
+ [-Confirm]
 ```
 
 ## ALIASES
@@ -110,6 +111,29 @@ ParameterSets:
 - Name: (All)
   Position: 0
   IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -UseWebApi
+
+Send the batch through the OData $batch endpoint instead of ExecuteMultiple.
+Required on Dataverse for Teams, which does not support the ExecuteMultiple message at all; elsewhere it is optional and the two behave alike.
+Without this switch the cmdlet tries ExecuteMultiple first and switches by itself when the environment refuses the message, remembering it for the session.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: false
   ValueFromPipeline: false
   ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
