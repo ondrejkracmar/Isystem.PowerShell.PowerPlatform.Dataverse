@@ -4,7 +4,7 @@ external help file: Isystem.PowerShell.PowerPlatform.Dataverse.dll-Help.xml
 HelpUri: ''
 Locale: en-US
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 10/01/2026
+ms.date: 10/02/2026
 PlatyPS schema version: 2024-05-01
 title: New-PSDataverseTable
 ---

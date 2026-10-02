@@ -1597,15 +1597,97 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
       <command:syntaxItem><maml:name>New-PSDataverseTable</maml:name><command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>SchemaName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="1" pipelineInput="false" globbing="false"><maml:name>DisplayName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>DisplayCollectionName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Description</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PrimaryNameColumn</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PrimaryNameDisplayName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PrimaryNameMaxLength</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Description</maml:name><maml:description><maml:para>Description shown in the maker portal.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>DisplayCollectionName</maml:name><maml:description><maml:para>Plural display name. Defaults to the display name with an s.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="1" pipelineInput="false" globbing="false"><maml:name>DisplayName</maml:name><maml:description><maml:para>Display name shown in the maker portal. Defaults to the schema name.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><maml:description><maml:para>Return the created table metadata instead of nothing.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PrimaryNameColumn</maml:name><maml:description><maml:para>Schema name of the primary name column. Defaults to the table prefix plus name, so it3c_person gets it3c_name.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PrimaryNameDisplayName</maml:name><maml:description><maml:para>Display name of the primary name column. Defaults to Name.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PrimaryNameMaxLength</maml:name><maml:description><maml:para>Length of the primary name column. Defaults to 200.</maml:para></maml:description><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter>
-      <command:parameter required="true" position="0" pipelineInput="false" globbing="false"><maml:name>SchemaName</maml:name><maml:description><maml:para>Schema name including the publisher customization prefix, for example it3c_person. The logical name every other cmdlet takes is this name lower-cased.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><maml:description><maml:para>Unique name of the solution to add the table to, not its display name. Omitted, the table lands in the Default solution and cannot be exported cleanly.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Description</maml:name>
+        <maml:description>
+          <maml:para>Description shown in the maker portal.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>DisplayCollectionName</maml:name>
+        <maml:description>
+          <maml:para>Plural display name. Defaults to the display name with an s.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="1" pipelineInput="false" globbing="false">
+        <maml:name>DisplayName</maml:name>
+        <maml:description>
+          <maml:para>Display name shown in the maker portal. Defaults to the schema name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>Return the created table metadata instead of nothing.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PrimaryNameColumn</maml:name>
+        <maml:description>
+          <maml:para>Schema name of the primary name column. Defaults to the table prefix plus name, so it3c_person gets it3c_name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PrimaryNameDisplayName</maml:name>
+        <maml:description>
+          <maml:para>Display name of the primary name column. Defaults to Name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PrimaryNameMaxLength</maml:name>
+        <maml:description>
+          <maml:para>Length of the primary name column. Defaults to 200.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="0" pipelineInput="false" globbing="false">
+        <maml:name>SchemaName</maml:name>
+        <maml:description>
+          <maml:para>Schema name including the publisher customization prefix, for example it3c_person. The logical name every other cmdlet takes is this name lower-cased.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>SolutionUniqueName</maml:name>
+        <maml:description>
+          <maml:para>Unique name of the solution to add the table to, not its display name. Omitted, the table lands in the Default solution and cannot be exported cleanly.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
         <maml:name>WhatIf</maml:name>
         <maml:description>
@@ -1673,20 +1755,157 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
       <command:syntaxItem><maml:name>New-PSDataverseColumn</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>SchemaName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="2" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Type</maml:name><command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Text</command:parameterValue><command:parameterValue required="false" variableLength="false">Memo</command:parameterValue><command:parameterValue required="false" variableLength="false">WholeNumber</command:parameterValue><command:parameterValue required="false" variableLength="false">TwoOptions</command:parameterValue><command:parameterValue required="false" variableLength="false">DateTime</command:parameterValue><command:parameterValue required="false" variableLength="false">Decimal</command:parameterValue><command:parameterValue required="false" variableLength="false">Money</command:parameterValue></command:parameterValueGroup><dev:type><maml:name>DataverseColumnType</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DisplayName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Description</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Required</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>MaxLength</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Precision</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DateOnly</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>TrueLabel</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>FalseLabel</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DefaultValue</maml:name><command:parameterValue required="true">Boolean</command:parameterValue><dev:type><maml:name>Boolean</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DateOnly</maml:name><maml:description><maml:para>DateTime only: store a date without a time.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DefaultValue</maml:name><maml:description><maml:para>TwoOptions only: the value a row gets when it does not set one. Defaults to true.</maml:para></maml:description><command:parameterValue required="true">Boolean</command:parameterValue><dev:type><maml:name>Boolean</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Description</maml:name><maml:description><maml:para>Description shown in the maker portal.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DisplayName</maml:name><maml:description><maml:para>Display name. Defaults to the schema name.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>FalseLabel</maml:name><maml:description><maml:para>TwoOptions only: label of the false option. Defaults to No.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><maml:description><maml:para>Logical name of the table to add the column to.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>MaxLength</maml:name><maml:description><maml:para>Text and Memo only. Defaults to 200 and 2000.</maml:para></maml:description><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><maml:description><maml:para>Return the created column metadata instead of nothing.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Precision</maml:name><maml:description><maml:para>Decimal and Money only. Defaults to 2.</maml:para></maml:description><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Required</maml:name><maml:description><maml:para>Make the column business required rather than optional.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>SchemaName</maml:name><maml:description><maml:para>Schema name of the new column including the publisher prefix, for example it3c_mail.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><maml:description><maml:para>Unique name of the solution to add the column to. Omitted, it lands in the Default solution.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>TrueLabel</maml:name><maml:description><maml:para>TwoOptions only: label of the true option. Defaults to Yes.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="true" position="2" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Type</maml:name><maml:description><maml:para>Column type: Text, Memo, WholeNumber, TwoOptions, DateTime, Decimal or Money.</maml:para></maml:description><command:parameterValueGroup><command:parameterValue required="false" variableLength="false">Text</command:parameterValue><command:parameterValue required="false" variableLength="false">Memo</command:parameterValue><command:parameterValue required="false" variableLength="false">WholeNumber</command:parameterValue><command:parameterValue required="false" variableLength="false">TwoOptions</command:parameterValue><command:parameterValue required="false" variableLength="false">DateTime</command:parameterValue><command:parameterValue required="false" variableLength="false">Decimal</command:parameterValue><command:parameterValue required="false" variableLength="false">Money</command:parameterValue></command:parameterValueGroup><dev:type><maml:name>DataverseColumnType</maml:name></dev:type></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>DateOnly</maml:name>
+        <maml:description>
+          <maml:para>DateTime only: store a date without a time.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>DefaultValue</maml:name>
+        <maml:description>
+          <maml:para>TwoOptions only: the value a row gets when it does not set one. Defaults to true.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Description</maml:name>
+        <maml:description>
+          <maml:para>Description shown in the maker portal.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>DisplayName</maml:name>
+        <maml:description>
+          <maml:para>Display name. Defaults to the schema name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>FalseLabel</maml:name>
+        <maml:description>
+          <maml:para>TwoOptions only: label of the false option. Defaults to No.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table to add the column to.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>MaxLength</maml:name>
+        <maml:description>
+          <maml:para>Text and Memo only. Defaults to 200 and 2000.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>Return the created column metadata instead of nothing.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Precision</maml:name>
+        <maml:description>
+          <maml:para>Decimal and Money only. Defaults to 2.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Required</maml:name>
+        <maml:description>
+          <maml:para>Make the column business required rather than optional.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>SchemaName</maml:name>
+        <maml:description>
+          <maml:para>Schema name of the new column including the publisher prefix, for example it3c_mail.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>SolutionUniqueName</maml:name>
+        <maml:description>
+          <maml:para>Unique name of the solution to add the column to. Omitted, it lands in the Default solution.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>TrueLabel</maml:name>
+        <maml:description>
+          <maml:para>TwoOptions only: label of the true option. Defaults to Yes.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="2" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Type</maml:name>
+        <maml:description>
+          <maml:para>Column type: Text, Memo, WholeNumber, TwoOptions, DateTime, Decimal or Money.</maml:para>
+        </maml:description>
+        <command:parameterValueGroup>
+          <command:parameterValue required="false" variableLength="false">Text</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Memo</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">WholeNumber</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">TwoOptions</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">DateTime</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Decimal</command:parameterValue>
+          <command:parameterValue required="false" variableLength="false">Money</command:parameterValue>
+        </command:parameterValueGroup>
+        <dev:type>
+          <maml:name>DataverseColumnType</maml:name>
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
         <maml:name>WhatIf</maml:name>
         <maml:description>
@@ -1761,14 +1980,88 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
       <command:syntaxItem><maml:name>New-PSDataverseKey</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="false" globbing="false"><maml:name>SchemaName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="2" pipelineInput="false" globbing="false"><maml:name>KeyAttribute</maml:name><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>DisplayName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Wait</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TimeoutSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>DisplayName</maml:name><maml:description><maml:para>Display name. Defaults to the schema name.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="true" position="2" pipelineInput="false" globbing="false"><maml:name>KeyAttribute</maml:name><maml:description><maml:para>The column or columns the key is made of.</maml:para></maml:description><command:parameterValue required="true">String[]</command:parameterValue><dev:type><maml:name>String[]</maml:name></dev:type></command:parameter>
-      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><maml:description><maml:para>Logical name of the table the key belongs to.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><maml:description><maml:para>Return the created key metadata, including its index status.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="true" position="1" pipelineInput="false" globbing="false"><maml:name>SchemaName</maml:name><maml:description><maml:para>Schema name of the key, for example it3c_sourceidkey.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><maml:description><maml:para>Unique name of the solution to add the key to. Omitted, it lands in the Default solution.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TimeoutSeconds</maml:name><maml:description><maml:para>How long -Wait waits before giving up. Defaults to 300.</maml:para></maml:description><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Wait</maml:name><maml:description><maml:para>Block until the unique index reports Active, rather than returning while it is still building. Use this whenever the script writes through the key afterwards.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>DisplayName</maml:name>
+        <maml:description>
+          <maml:para>Display name. Defaults to the schema name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="2" pipelineInput="false" globbing="false">
+        <maml:name>KeyAttribute</maml:name>
+        <maml:description>
+          <maml:para>The column or columns the key is made of.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table the key belongs to.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>Return the created key metadata, including its index status.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="false" globbing="false">
+        <maml:name>SchemaName</maml:name>
+        <maml:description>
+          <maml:para>Schema name of the key, for example it3c_sourceidkey.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>SolutionUniqueName</maml:name>
+        <maml:description>
+          <maml:para>Unique name of the solution to add the key to. Omitted, it lands in the Default solution.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>TimeoutSeconds</maml:name>
+        <maml:description>
+          <maml:para>How long -Wait waits before giving up. Defaults to 300.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Wait</maml:name>
+        <maml:description>
+          <maml:para>Block until the unique index reports Active, rather than returning while it is still building. Use this whenever the script writes through the key afterwards.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
         <maml:name>WhatIf</maml:name>
         <maml:description>
@@ -1836,15 +2129,98 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
       <command:syntaxItem><maml:name>New-PSDataverseLookup</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>TargetLogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="2" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>SchemaName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DisplayName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Description</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>RelationshipSchemaName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Required</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Description</maml:name><maml:description><maml:para>Description shown in the maker portal.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>DisplayName</maml:name><maml:description><maml:para>Display name of the lookup column. Defaults to the schema name.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><maml:description><maml:para>Logical name of the table the lookup column lives on - the child, or many side.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><maml:description><maml:para>Return the created lookup column metadata instead of nothing.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>RelationshipSchemaName</maml:name><maml:description><maml:para>Schema name of the relationship, which is what the Web API navigation property and the OData bind annotation are built from. Defaults to child_lookupcolumn_parent.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Required</maml:name><maml:description><maml:para>Make the lookup business required rather than optional.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="true" position="2" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>SchemaName</maml:name><maml:description><maml:para>Schema name of the lookup column, for example it3c_personid.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>SolutionUniqueName</maml:name><maml:description><maml:para>Unique name of the solution to add the relationship to. Omitted, it lands in the Default solution.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
-      <command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>TargetLogicalName</maml:name><maml:description><maml:para>Logical name of the table the lookup points at - the parent, or one side.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Description</maml:name>
+        <maml:description>
+          <maml:para>Description shown in the maker portal.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>DisplayName</maml:name>
+        <maml:description>
+          <maml:para>Display name of the lookup column. Defaults to the schema name.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table the lookup column lives on - the child, or many side.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>Return the created lookup column metadata instead of nothing.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>RelationshipSchemaName</maml:name>
+        <maml:description>
+          <maml:para>Schema name of the relationship, which is what the Web API navigation property and the OData bind annotation are built from. Defaults to child_lookupcolumn_parent.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Required</maml:name>
+        <maml:description>
+          <maml:para>Make the lookup business required rather than optional.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" position="2" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>SchemaName</maml:name>
+        <maml:description>
+          <maml:para>Schema name of the lookup column, for example it3c_personid.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>SolutionUniqueName</maml:name>
+        <maml:description>
+          <maml:para>Unique name of the solution to add the relationship to. Omitted, it lands in the Default solution.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>TargetLogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table the lookup points at - the parent, or one side.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
         <maml:name>WhatIf</maml:name>
         <maml:description>
@@ -2181,6 +2557,197 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
         <dev:code>PS C:\&gt; Get-PSDataverseTable it3c_* | Get-PSDataverseKey | Where-Object IndexStatus -ne Active</dev:code>
         <dev:remarks>
           <maml:para>Across every custom table, the keys that are not usable for an upsert yet.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <command:command>
+    <command:details>
+      <command:name>Enable-PSDataverseKey</command:name>
+      <command:verb>Enable</command:verb>
+      <command:noun>PSDataverseKey</command:noun>
+      <maml:description>
+        <maml:para>Asks Dataverse to build an alternate key's unique index again.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Enable-PSDataverseKey cmdlet reactivates the unique index behind an alternate key. A key whose index never became active is created but unusable, and an upsert addressed by it fails with a message that never mentions the index.</maml:para>
+      <maml:para>The usual cause is the column rather than the key: the index is unique, so more than one blank cannot be indexed - a new column on a table of sixteen thousand rows is sixteen thousand duplicate blanks, and the index stays Pending until it fails. Populate the column first, then reactivate.</maml:para>
+      <maml:para>This is cheaper than removing the key and creating it again, and on Dataverse for Teams it is the only route at all, because the maker portal there does not show alternate keys. The rebuild is asynchronous just as the first attempt was, so use -Wait in a script that reactivates a key and then writes through it.</maml:para>
+      <maml:para>An index reporting Failed is reported as an error immediately instead of being waited on: Failed means the rows are wrong, and no amount of waiting changes that.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Enable-PSDataverseKey</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Name</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Wait</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>TimeoutSeconds</maml:name><command:parameterValue required="true">Int32</command:parameterValue><dev:type><maml:name>Int32</maml:name></dev:type></command:parameter><command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>PassThru</maml:name><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table the key is on.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the key itself, for example it3c_sourceidkey.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>Returns whether the index is Active. Without -Wait that is rarely true yet.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>TimeoutSeconds</maml:name>
+        <maml:description>
+          <maml:para>How long -Wait waits before giving up. Five minutes by default; a large table takes longer to index.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Wait</maml:name>
+        <maml:description>
+          <maml:para>Waits until the index reports Active instead of returning as soon as the rebuild is asked for.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Confirm</maml:name><maml:description><maml:para>Prompts for confirmation before reactivating the index.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>WhatIf</maml:name><maml:description><maml:para>Shows what the cmdlet would reactivate without sending anything.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>LogicalName and Name bind by property name, so the output of Get-PSDataverseKey can be piped in.</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Boolean</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>With -PassThru, whether the index reports Active. Without -Wait that is rarely true yet.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Rebuild the index once the column has values ---</maml:title>
+        <dev:code>Enable-PSDataverseKey -LogicalName it3c_aaduser -Name it3c_sourceidkey -Wait</dev:code>
+        <dev:remarks>
+          <maml:para>Blocks until the index is Active, so the very next upsert through the key succeeds.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Every key that is not usable yet ---</maml:title>
+        <dev:code>PS C:\&gt; Get-PSDataverseKey it3c_aaduser | Where-Object IndexStatus -ne Active | Enable-PSDataverseKey -Wait -Confirm:$false</dev:code>
+        <dev:remarks>
+          <maml:para>Reactivates each one in turn. On Dataverse for Teams the metadata read returns no keys, so name them instead of discovering them.</maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+  </command:command>
+  <command:command>
+    <command:details>
+      <command:name>Remove-PSDataverseKey</command:name>
+      <command:verb>Remove</command:verb>
+      <command:noun>PSDataverseKey</command:noun>
+      <maml:description>
+        <maml:para>Removes an alternate key from a Dataverse table.</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>The Remove-PSDataverseKey cmdlet deletes an alternate key. It is the counterpart to New-PSDataverseKey and the way out of a key whose unique index never became active.</maml:para>
+      <maml:para>That state is easy to reach: the index is unique, so a column holding more than one blank cannot carry one. Create a key on a column that has not been populated yet and it is created, never activates, and cannot be used - while on Dataverse for Teams the maker portal does not show keys at all, so there was no way to clear it.</maml:para>
+      <maml:para>The order that works is column, data, key. Where a key has already been left behind, try Enable-PSDataverseKey first - it rebuilds the index and keeps the key - and remove it here only if that fails.</maml:para>
+      <maml:para>Only the key is removed. The column it was made of and the data in it are untouched.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem><maml:name>Remove-PSDataverseKey</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Name</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>LogicalName</maml:name>
+        <maml:description>
+          <maml:para>Logical name of the table the key is on.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1" pipelineInput="True (ByPropertyName)" globbing="false">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>Logical or schema name of the key itself, for example it3c_sourceidkey. This is the key's own name, not the column it is made of.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Confirm</maml:name><maml:description><maml:para>Prompts for confirmation before removing the key. This cmdlet prompts by default because removing a key is a schema change.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>WhatIf</maml:name><maml:description><maml:para>Shows what the cmdlet would remove without sending anything.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>System.String</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>LogicalName and Name bind by property name, so the output of Get-PSDataverseKey can be piped in.</maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para>This cmdlet returns nothing.</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>--- Example 1: Clear a key that never became usable ---</maml:title>
+        <dev:code>Remove-PSDataverseKey -LogicalName it3c_aaduser -Name it3c_sourceidkey</dev:code>
+        <dev:remarks>
+          <maml:para>Removes the key and leaves the column and its data alone. Prompts first - this is a schema change.</maml:para>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title>--- Example 2: Replace the key after filling the column ---</maml:title>
+        <dev:code>PS C:\&gt; Remove-PSDataverseKey it3c_aaduser it3c_sourceidkey -Confirm:$false
+PS C:\&gt; New-PSDataverseKey -LogicalName it3c_aaduser -SchemaName it3c_sourceidkey -KeyAttribute it3c_sourceid -Wait</dev:code>
+        <dev:remarks>
+          <maml:para>With the column populated, the new index has nothing duplicate to trip over and activates.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

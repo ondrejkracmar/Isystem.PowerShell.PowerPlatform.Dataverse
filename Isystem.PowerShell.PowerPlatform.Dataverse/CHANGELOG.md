@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 All notable changes to **Isystem.PowerShell.PowerPlatform.Dataverse** are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
@@ -6,6 +6,34 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html). The newes
 copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
+
+## [1.5.0] - 2026-10-02
+
+### Added
+
+- `Remove-PSDataverseKey` deletes an alternate key, and `Enable-PSDataverseKey` asks Dataverse to
+  build its unique index again. Both exist because of a trap that cost a production afternoon: the
+  index behind an alternate key is a unique index, so a column holding more than one blank cannot
+  carry one. Create the key before the column is populated - 16,824 rows with nothing in the new
+  column - and the key is created, never activates, and every upsert through it fails with a message
+  that never mentions the index. On Dataverse for Teams the maker portal does not show alternate
+  keys at all, so there was no way to clear or rebuild the key from anywhere. The order that works
+  is column, data, key.
+- `Enable-PSDataverseKey -Wait` polls until the index reports Active, because the rebuild is
+  asynchronous just as the first attempt was. An index reporting `Failed` is raised as an error
+  straight away instead of being waited on: Failed means the rows are wrong, and waiting will not
+  change them.
+- The index status is read with `RetrieveEntityKeyRequest`, one key at a time. Reading the table and
+  picking the key out of its metadata - what `Get-PSDataverseKey` does - returns no keys at all on
+  this offering, which is why the status was unreadable until now.
+
+### Fixed
+
+- `build/Update-MamlSyntax.ps1` dropped `-WhatIf` and `-Confirm` from the generated parameter
+  entries. `Help.Tests.ps1` excludes only the twelve true common parameters, so every new cmdlet
+  supporting `ShouldProcess` failed four help tests - as `-UseWebApi` did in 1.4.0. The generator
+  emits both now, and the module tests cover every cmdlet the manifest promises instead of counting
+  them, so a cmdlet left out of `CmdletsToExport` fails a test rather than shipping uncallable.
 
 ## [1.4.1] - 2026-10-01
 

@@ -1,4 +1,4 @@
-# Isystem.PowerShell.PowerPlatform.Dataverse
+﻿# Isystem.PowerShell.PowerPlatform.Dataverse
 
 PowerShell binary module for **Microsoft Dataverse** (Power Platform, Dynamics 365). Session-based connection, CRUD, **upsert by alternate key**, batches, transactions, FetchXML with paging - and an authentication model that also covers environments **without application users** (Dataverse for Teams, no premium licence) through a delegated sign-in whose token cache you keep in your own secret store.
 
@@ -109,7 +109,7 @@ The same package is published to the i-system Azure Artifacts feed for internal 
 ```powershell
 Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 
-# Should list all 22 cmdlets:
+# Should list all 24 cmdlets:
 #   Connect-PSDataverse          Disconnect-PSDataverse
 #   Get-PSDataverseConnection    Get-PSDataverseTokenCache
 #   Get-PSDataverseRecord        Get-PSDataverseRecordCount
@@ -121,6 +121,7 @@ Get-Command -Module Isystem.PowerShell.PowerPlatform.Dataverse
 #   Get-PSDataverseKey           ConvertTo-PSDataverseObject
 #   New-PSDataverseTable         New-PSDataverseColumn
 #   New-PSDataverseKey           New-PSDataverseLookup
+#   Enable-PSDataverseKey        Remove-PSDataverseKey
 ```
 
 ---

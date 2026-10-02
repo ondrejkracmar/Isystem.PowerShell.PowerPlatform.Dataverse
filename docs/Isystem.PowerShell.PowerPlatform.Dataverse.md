@@ -5,7 +5,7 @@ HelpInfoUri:
 Locale: en-US
 Module Guid: 4f78bc29-fd8d-444c-a449-a244eeb23a79
 Module Name: Isystem.PowerShell.PowerPlatform.Dataverse
-ms.date: 10/01/2026
+ms.date: 10/02/2026
 PlatyPS schema version: 2024-05-01
 title: Isystem.PowerShell.PowerPlatform.Dataverse Module
 ---
@@ -29,6 +29,10 @@ Converts Dataverse records into flat PowerShell objects.
 ### [Disconnect-PSDataverse](Disconnect-PSDataverse.md)
 
 Disconnects from the current Dataverse environment.
+
+### [Enable-PSDataverseKey](Enable-PSDataverseKey.md)
+
+Asks Dataverse to build an alternate key's unique index again.
 
 ### [Find-PSDataverseRecord](Find-PSDataverseRecord.md)
 
@@ -93,6 +97,10 @@ Creates a new record in a Dataverse table.
 ### [New-PSDataverseTable](New-PSDataverseTable.md)
 
 Creates a custom Dataverse table.
+
+### [Remove-PSDataverseKey](Remove-PSDataverseKey.md)
+
+Removes an alternate key from a Dataverse table.
 
 ### [Remove-PSDataverseRecord](Remove-PSDataverseRecord.md)
 
