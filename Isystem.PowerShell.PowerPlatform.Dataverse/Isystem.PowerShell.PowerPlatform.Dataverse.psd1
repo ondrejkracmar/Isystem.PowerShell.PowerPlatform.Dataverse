@@ -12,7 +12,7 @@
 RootModule = 'Isystem.PowerShell.PowerPlatform.Dataverse.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.5.0'
+ModuleVersion = '1.5.1'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core'
@@ -118,33 +118,31 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '## [1.5.0] - 2026-10-02
+        ReleaseNotes = '## [1.5.1] - 2026-10-02
 
 ### Added
 
-- `Remove-PSDataverseKey` deletes an alternate key, and `Enable-PSDataverseKey` asks Dataverse to
-  build its unique index again. Both exist because of a trap that cost a production afternoon: the
-  index behind an alternate key is a unique index, so a column holding more than one blank cannot
-  carry one. Create the key before the column is populated - 16,824 rows with nothing in the new
-  column - and the key is created, never activates, and every upsert through it fails with a message
-  that never mentions the index. On Dataverse for Teams the maker portal does not show alternate
-  keys at all, so there was no way to clear or rebuild the key from anywhere. The order that works
-  is column, data, key.
-- `Enable-PSDataverseKey -Wait` polls until the index reports Active, because the rebuild is
-  asynchronous just as the first attempt was. An index reporting `Failed` is raised as an error
-  straight away instead of being waited on: Failed means the rows are wrong, and waiting will not
-  change them.
-- The index status is read with `RetrieveEntityKeyRequest`, one key at a time. Reading the table and
-  picking the key out of its metadata - what `Get-PSDataverseKey` does - returns no keys at all on
-  this offering, which is why the status was unreadable until now.
+- `Get-PSDataverseKey -Name <key>` reads one alternate key on its own through
+  `RetrieveEntityKeyRequest`. Until now the only way to see an index status was to list a table''s
+  keys - a read that comes back with no keys at all on Dataverse for Teams even where keys exist -
+  or to ask `Enable-PSDataverseKey` for a rebuild and watch what it said. There was no read-only
+  answer to the one question that matters, and the states need opposite responses: `Pending` is a
+  service that is behind and data that is fine, `Failed` is duplicates in the column.
+- The listing path asks for `EntityFilters.All` instead of `EntityFilters.Entity`. Entity-level
+  metadata does not reliably carry `Keys`, which is how this cmdlet came to report a working key as
+  absent; `All` is a superset, so it can only return more, at the cost of a larger payload that a
+  diagnostic cmdlet can afford. Where the answer has to be certain, `-Name` is the one to use.
 
 ### Fixed
 
-- `build/Update-MamlSyntax.ps1` dropped `-WhatIf` and `-Confirm` from the generated parameter
-  entries. `Help.Tests.ps1` excludes only the twelve true common parameters, so every new cmdlet
-  supporting `ShouldProcess` failed four help tests - as `-UseWebApi` did in 1.4.0. The generator
-  emits both now, and the module tests cover every cmdlet the manifest promises instead of counting
-  them, so a cmdlet left out of `CmdletsToExport` fails a test rather than shipping uncallable.
+- `Enable-PSDataverseKey` reads the index status before acting. Dataverse accepts a reactivation
+  only for a failed job and answers `Reactivate entity key is only supported for failed job`
+  otherwise, so asking regardless turned the ordinary case - an index still being built - into a
+  service message that read like a fault. An Active index is now reported as already built, a Failed
+  one is reactivated, and one still building is waited for rather than reactivated. Hit on
+  production while rescuing a key whose index had not finished in 300 s.
+- The resource test enumerates the resx instead of listing its entries by hand. The list had fallen
+  behind twice over: every string added for the batch and the key cmdlets was uncovered.
 '
 
         # Prerelease string of this module

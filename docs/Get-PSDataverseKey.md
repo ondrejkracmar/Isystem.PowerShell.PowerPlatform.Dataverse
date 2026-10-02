@@ -20,7 +20,7 @@ Gets the alternate keys of a Dataverse table and the state of their indexes.
 ### __AllParameterSets
 
 ```
-Get-PSDataverseKey [-LogicalName] <string>
+Get-PSDataverseKey [-LogicalName] <string> [[-Name] <string>]
 ```
 
 ## ALIASES
@@ -64,6 +64,30 @@ ParameterSets:
   Position: 0
   IsRequired: true
   ValueFromPipeline: true
+  ValueFromPipelineByPropertyName: true
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
+### -Name
+
+Logical name of a single key to read, for example it3c_sourceidkey.
+Read on its own through RetrieveEntityKeyRequest, which answers even where a table-wide metadata read returns no keys at all.
+
+```yaml
+Type: System.String
+DefaultValue: ''
+SupportsWildcards: false
+Aliases:
+- SchemaName
+- KeyName
+ParameterSets:
+- Name: (All)
+  Position: 1
+  IsRequired: false
+  ValueFromPipeline: false
   ValueFromPipelineByPropertyName: true
   ValueFromRemainingArguments: false
 DontShow: false

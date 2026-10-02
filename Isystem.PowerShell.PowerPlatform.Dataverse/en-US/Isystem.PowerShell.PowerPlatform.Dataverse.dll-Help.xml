@@ -2510,7 +2510,7 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
       <maml:para>Everything that upserts by key - Set-PSDataverseRecord -Key, an Upsert operation in Invoke-PSDataverseBatch - depends on a key whose index status is Active. A key whose index is Pending or Failed fails at runtime with a message that never mentions the index, which makes this the first thing to check when an upsert that worked yesterday stops working.</maml:para>
     </maml:description>
     <command:syntax>
-      <command:syntaxItem><maml:name>Get-PSDataverseKey</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
+      <command:syntaxItem><maml:name>Get-PSDataverseKey</maml:name><command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false"><maml:name>LogicalName</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter><command:parameter required="false" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Name</maml:name><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter></command:syntaxItem>
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" position="0" pipelineInput="True (ByValue, ByPropertyName)" globbing="false">
@@ -2523,6 +2523,7 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
           <maml:name>String</maml:name>
         </dev:type>
       </command:parameter>
+      <command:parameter required="false" position="1" pipelineInput="True (ByPropertyName)" globbing="false"><maml:name>Name</maml:name><maml:description><maml:para>Logical name of a single key to read, for example it3c_sourceidkey. Read on its own through RetrieveEntityKeyRequest, which answers even where a table-wide metadata read returns no keys at all.</maml:para></maml:description><command:parameterValue required="true">String</command:parameterValue><dev:type><maml:name>String</maml:name></dev:type></command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -2632,8 +2633,28 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Confirm</maml:name><maml:description><maml:para>Prompts for confirmation before reactivating the index.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>WhatIf</maml:name><maml:description><maml:para>Shows what the cmdlet would reactivate without sending anything.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts for confirmation before reactivating the index.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what the cmdlet would reactivate without sending anything.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -2711,8 +2732,28 @@ $result.Items | ConvertTo-PSDataverseObject -IncludeFormattedValues | Format-Tab
           <maml:name>String</maml:name>
         </dev:type>
       </command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>Confirm</maml:name><maml:description><maml:para>Prompts for confirmation before removing the key. This cmdlet prompts by default because removing a key is a schema change.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="false" globbing="false"><maml:name>WhatIf</maml:name><maml:description><maml:para>Shows what the cmdlet would remove without sending anything.</maml:para></maml:description><command:parameterValue required="false">SwitchParameter</command:parameterValue><dev:type><maml:name>SwitchParameter</maml:name></dev:type><dev:defaultValue>False</dev:defaultValue></command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>Confirm</maml:name>
+        <maml:description>
+          <maml:para>Prompts for confirmation before removing the key. This cmdlet prompts by default because removing a key is a schema change.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="false" globbing="false">
+        <maml:name>WhatIf</maml:name>
+        <maml:description>
+          <maml:para>Shows what the cmdlet would remove without sending anything.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+        </dev:type>
+        <dev:defaultValue>False</dev:defaultValue>
+      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
