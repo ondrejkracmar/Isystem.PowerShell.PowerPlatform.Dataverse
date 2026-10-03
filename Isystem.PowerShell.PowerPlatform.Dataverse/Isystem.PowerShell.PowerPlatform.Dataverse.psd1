@@ -12,7 +12,7 @@
 RootModule = 'Isystem.PowerShell.PowerPlatform.Dataverse.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.5.3'
+ModuleVersion = '1.5.4'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core'
@@ -118,20 +118,21 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '## [1.5.3] - 2026-10-03
+        ReleaseNotes = '## [1.5.4] - 2026-10-03
 
 ### Fixed
 
-- The Web API batch path added in 1.5.2 never ran. It chose itself on
-  `ServiceClient.CurrentAccessToken`, which is empty whenever the client was built on a token
-  provider - every delegated and every AzAuth connection this module opens - so every batch still
-  went through the SDK, and a production load still died inside it on
-  `JsonReaderException: Unexpected character encountered while parsing number`. The token now comes
-  from the session''s own provider, the one the client itself acquires with, which also means a long
-  run gets a fresh token per batch instead of the one acquired at connect time.
-- The request is testable now and tested: `PostBatch` builds and sends it without needing a
-  connection, and a test asserts the address, the bearer header and the multipart boundary. Shipping
-  an unexercised code path twice was the actual fault here, not the condition that was wrong.
+- `-UseWebApi` sends a value shaped like the column that receives it. The SOAP endpoint coerces on
+  the way in and the OData endpoint does not, so one operation through one cmdlet behaved
+  differently depending on this switch: an integer into a text column answered `Cannot convert a
+  value of type ''Edm.Int32'' to the expected target type ''Edm.String''` - and because one bad part
+  refuses the whole batch, 900 good rows failed with it. A production load of 181,000 rows died on
+  exactly that after 62,100 rows had gone in cleanly. Two paths of one cmdlet must not differ in
+  what they accept.
+- The column types come from the metadata read that already fetched the entity set name, so this
+  costs no extra round trip. A value that cannot be converted, and a column whose type is unknown,
+  are sent as they came: the service then reports the problem against the row it belongs to rather
+  than this code hiding it.
 '
 
         # Prerelease string of this module

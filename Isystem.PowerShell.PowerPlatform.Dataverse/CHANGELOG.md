@@ -7,6 +7,22 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
+## [1.5.4] - 2026-10-03
+
+### Fixed
+
+- `-UseWebApi` sends a value shaped like the column that receives it. The SOAP endpoint coerces on
+  the way in and the OData endpoint does not, so one operation through one cmdlet behaved
+  differently depending on this switch: an integer into a text column answered `Cannot convert a
+  value of type 'Edm.Int32' to the expected target type 'Edm.String'` - and because one bad part
+  refuses the whole batch, 900 good rows failed with it. A production load of 181,000 rows died on
+  exactly that after 62,100 rows had gone in cleanly. Two paths of one cmdlet must not differ in
+  what they accept.
+- The column types come from the metadata read that already fetched the entity set name, so this
+  costs no extra round trip. A value that cannot be converted, and a column whose type is unknown,
+  are sent as they came: the service then reports the problem against the row it belongs to rather
+  than this code hiding it.
+
 ## [1.5.3] - 2026-10-03
 
 ### Fixed
