@@ -7,6 +7,21 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
+## [1.5.3] - 2026-10-03
+
+### Fixed
+
+- The Web API batch path added in 1.5.2 never ran. It chose itself on
+  `ServiceClient.CurrentAccessToken`, which is empty whenever the client was built on a token
+  provider - every delegated and every AzAuth connection this module opens - so every batch still
+  went through the SDK, and a production load still died inside it on
+  `JsonReaderException: Unexpected character encountered while parsing number`. The token now comes
+  from the session's own provider, the one the client itself acquires with, which also means a long
+  run gets a fresh token per batch instead of the one acquired at connect time.
+- The request is testable now and tested: `PostBatch` builds and sends it without needing a
+  connection, and a test asserts the address, the bearer header and the multipart boundary. Shipping
+  an unexercised code path twice was the actual fault here, not the condition that was wrong.
+
 ## [1.5.2] - 2026-10-02
 
 ### Fixed
