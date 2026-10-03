@@ -12,7 +12,7 @@
 RootModule = 'Isystem.PowerShell.PowerPlatform.Dataverse.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.5.1'
+ModuleVersion = '1.5.2'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core'
@@ -118,31 +118,21 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '## [1.5.1] - 2026-10-02
-
-### Added
-
-- `Get-PSDataverseKey -Name <key>` reads one alternate key on its own through
-  `RetrieveEntityKeyRequest`. Until now the only way to see an index status was to list a table''s
-  keys - a read that comes back with no keys at all on Dataverse for Teams even where keys exist -
-  or to ask `Enable-PSDataverseKey` for a rebuild and watch what it said. There was no read-only
-  answer to the one question that matters, and the states need opposite responses: `Pending` is a
-  service that is behind and data that is fine, `Failed` is duplicates in the column.
-- The listing path asks for `EntityFilters.All` instead of `EntityFilters.Entity`. Entity-level
-  metadata does not reliably carry `Keys`, which is how this cmdlet came to report a working key as
-  absent; `All` is a superset, so it can only return more, at the cost of a larger payload that a
-  diagnostic cmdlet can afford. Where the answer has to be certain, `-Name` is the one to use.
+        ReleaseNotes = '## [1.5.2] - 2026-10-02
 
 ### Fixed
 
-- `Enable-PSDataverseKey` reads the index status before acting. Dataverse accepts a reactivation
-  only for a failed job and answers `Reactivate entity key is only supported for failed job`
-  otherwise, so asking regardless turned the ordinary case - an index still being built - into a
-  service message that read like a fault. An Active index is now reported as already built, a Failed
-  one is reactivated, and one still building is waited for rather than reactivated. Hit on
-  production while rescuing a key whose index had not finished in 300 s.
-- The resource test enumerates the resx instead of listing its entries by hand. The list had fallen
-  behind twice over: every string added for the batch and the key cmdlets was uncovered.
+- `Invoke-PSDataverseBatch -UseWebApi` sends the request itself instead of handing it to
+  `ServiceClient.ExecuteWebRequest`. On a status the SDK treats as a failure it tries to read the
+  body as a Dataverse JSON fault, and a `$batch` answer is multipart/mixed - so the attempt threw
+  `JsonReaderException: Unexpected character encountered while parsing number` and the real answer
+  was lost. A production load of 181,000 link rows died on that, reporting neither the status, nor
+  the request, nor what the service had said. The batch now goes out over the module''s own
+  `HttpClient` with the connection''s bearer token, so the status and the body always reach the
+  parser; the SDK path remains for connections that expose no token, and a failure there says how
+  many requests and how many bytes were sent.
+- A refusal of the whole batch carries the service''s own words. 413 for an oversized body, 429 for
+  service protection and 400 for a malformed part are indistinguishable without them.
 '
 
         # Prerelease string of this module

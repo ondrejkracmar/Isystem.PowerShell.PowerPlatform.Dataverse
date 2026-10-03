@@ -7,6 +7,22 @@ copied into the module manifest's `ReleaseNotes` by the build.
 
 ## [Unreleased]
 
+## [1.5.2] - 2026-10-02
+
+### Fixed
+
+- `Invoke-PSDataverseBatch -UseWebApi` sends the request itself instead of handing it to
+  `ServiceClient.ExecuteWebRequest`. On a status the SDK treats as a failure it tries to read the
+  body as a Dataverse JSON fault, and a `$batch` answer is multipart/mixed - so the attempt threw
+  `JsonReaderException: Unexpected character encountered while parsing number` and the real answer
+  was lost. A production load of 181,000 link rows died on that, reporting neither the status, nor
+  the request, nor what the service had said. The batch now goes out over the module's own
+  `HttpClient` with the connection's bearer token, so the status and the body always reach the
+  parser; the SDK path remains for connections that expose no token, and a failure there says how
+  many requests and how many bytes were sent.
+- A refusal of the whole batch carries the service's own words. 413 for an oversized body, 429 for
+  service protection and 400 for a malformed part are indistinguishable without them.
+
 ## [1.5.1] - 2026-10-02
 
 ### Added
